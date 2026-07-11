@@ -13,6 +13,31 @@ client_vips=()
 RED="\e[1;31m"; GREEN="\e[1;32m"; YELLOW="\e[1;33m"
 CYAN="\e[1;36m"; MAGENTA="\e[1;35m"; BOLD="\e[1m"; RESET="\e[0m"
 
+# ===== HỆ THỐNG XÁC THỰC KEY (MỚI) =====
+URL_KEY="https://raw.githubusercontent.com/trandurhrie-boop/Ducthinh/main/key.txt"
+
+check_key() {
+    clear
+    echo -e "${CYAN}======================================================${RESET}"
+    echo -e "${BOLD}${YELLOW}               HỆ THỐNG XÁC THỰC KEY                  ${RESET}"
+    echo -e "${CYAN}======================================================${RESET}"
+    echo ""
+    printf "${CYAN}>>${RESET} ${BOLD}Nhập mã Key để kích hoạt tool: ${RESET}"
+    read -r user_key
+
+    # Tải danh sách key từ GitHub về kiểm tra ngầm xem có khớp không
+    if curl -s "$URL_KEY" | grep -qxFF "$user_key"; then
+        echo -e "\n${GREEN}[+] Key chính xác! Đang khởi động tool...${RESET}"
+        sleep 2
+    else
+        echo -e "\n${RED}[X] Key sai hoặc đã hết hạn! Vui lòng liên hệ Đức Thịnh.${RESET}"
+        exit 1
+    fi
+}
+
+# Chạy hàm kiểm tra key trước khi mở các tính năng khác
+check_key
+
 # ===== GIAO DIỆN CHÍNH =====
 draw_menu() {
 clear
