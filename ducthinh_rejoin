@@ -1,515 +1,218 @@
-#!/data/data/com.termux/files/usr/bin/env bash
 
-# ===== CẤU HÌNH BAN ĐẦU =====
-CHECK_INTERVAL=20
-PLACE_ID="2753915549"
-VIP_LINK="0"
-TARGET_FPS="20"
-selected_clients=()
-client_places=()
-client_vips=()
-
-# ===== BẢNG MÀU SÁNG & RÕ NÉT =====
-RED="\e[1;31m"; GREEN="\e[1;32m"; YELLOW="\e[1;33m"
-CYAN="\e[1;36m"; MAGENTA="\e[1;35m"; BOLD="\e[1m"; RESET="\e[0m"
-
-# ===== HỆ THỐNG XÁC THỰC KEY (MỚI) =====
-URL_KEY="https://raw.githubusercontent.com/trandurhrie-boop/Ducthinh/main/key.txt"
-
-check_key() {
-    clear
-    echo -e "${CYAN}======================================================${RESET}"
-    echo -e "${BOLD}${YELLOW}               HỆ THỐNG XÁC THỰC KEY                  ${RESET}"
-    echo -e "${CYAN}======================================================${RESET}"
-    echo ""
-    printf "${CYAN}>>${RESET} ${BOLD}Nhập mã Key để kích hoạt tool: ${RESET}"
-    read -r user_key
-
-    # Tải danh sách key từ GitHub về kiểm tra ngầm xem có khớp không
-    if curl -s "$URL_KEY" | grep -qxFF "$user_key"; then
-        echo -e "\n${GREEN}[+] Key chính xác! Đang khởi động tool...${RESET}"
-        sleep 2
-    else
-        echo -e "\n${RED}[X] Key sai hoặc đã hết hạn! Vui lòng liên hệ Đức Thịnh.${RESET}"
-        exit 1
-    fi
-}
-
-# Chạy hàm kiểm tra key trước khi mở các tính năng khác
-check_key
-
-# ===== GIAO DIỆN CHÍNH =====
-draw_menu() {
-clear
-printf "${GREEN} _____  _   _  ___  _   _  _   _ ${RESET}\n"
-printf "${GREEN}|_   || | | || || \ | || | | |${RESET}\n"
-printf "${GREEN}  | |  | || | | | |  \| || || |${RESET}\n"
-printf "${GREEN}  | |  |  _  | | | | |\  ||  _  |${RESET}\n"
-printf "${GREEN}  ||  || |||||| \||| |_|${RESET}\n"
-printf "       ${BOLD}Đ Ứ C  T H Ị N H  R E J O I N${RESET}\n"
-echo -e "${CYAN}+------------------------------------------------------+${RESET}"
-printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "1. Bắt đầu Farm" "2. Chọn App / Nick"
-printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "3. Cài Map & SVV" "4. Thiết lập số FPS khóa"
-printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "5. Siêu Fix Lag + Lock FPS" "6. Bơm Script Cày Thuê Gui"
-printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "0. Thoát (Exit)" ""
-echo -e "${CYAN}+------------------------------------------------------+${RESET}"
-}
-
-# ===== [OPTION 5] BƠM SCRIPT LUA CAN THIỆP THẲNG VÀO ENGINE ROBLOX =====
-super_fix_lag() {
-clear
-echo -e "${BOLD}${YELLOW}--- [5] TỰ ĐỘNG BƠM SCRIPT SIÊU FIX LAG & LOCK FPS NỘI BỘ ---${RESET}"
-
-if [ ${#selected_clients[@]} -eq 0 ]; then
-    echo -e "${RED}Lỗi: Bạn chưa chọn Nick ở Option 2!${RESET}"
-    sleep 2; return
-fi
-
-local LUA_FILE="/sdcard/Termux_SuperFixLag.lua"
-
-cat << 'EOL' > "$LUA_FILE"
-repeat wait() until game:IsLoaded()
-
-pcall(function()
-if setfpscap then
-setfpscap($TARGET_FPS)
-print("Đã khóa FPS thành công ở mức: " .. tostring($TARGET_FPS))
-end
-end)
-
-local workspace = game:GetService("Workspace")
-local lighting = game:GetService("Lighting")
-lighting.GlobalShadows = false
-
-for _, obj in pairs(workspace:GetDescendants()) do
-if obj:IsA("BasePart") then
-obj.Material = Enum.Material.SmoothPlastic
-obj.Reflectance = 0
-end
-if obj:IsA("Decal") or obj:IsA("Texture") or obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
-obj:Destroy()
-end
-local name = obj.Name:lower()
-if name:match("tree") or name:match("leaf") or name:match("grass") or name:match("house") or name:match("building") then
-pcall(function() obj:Destroy() end)
-end
-end
-EOL
-
-echo -e "${CYAN}Đang quét tìm toàn bộ folder Autoexecute của các Executor phổ biến...${RESET}"
-local success_count=0
-
-local paths=(
-"/sdcard/Delta/Autoexecute"
-"/sdcard/Fluxus/Autoexecute"
-"/sdcard/VegaX/Autoexecute"
-"/sdcard/ArceusX/Autoexecute"
-"/sdcard/Codex/Autoexecute"
-"/sdcard/Cryptic/Autoexecute"
-"/sdcard/com.roblox.client/files/autoexec"
-)
-
-local -a target_folders=()
-for p in "${paths[@]}"; do [ -d "$p" ] && target_folders+=("$p"); done
-
-while IFS= read -r found; do
-    [ -n "$found" ] && target_folders+=("$found")
-done < <(
-    find /sdcard \
-        \( -iname "Autoexecute" -o -iname "autoexec" \) \
-        -type d 2>/dev/null
-)
-
-local -a unique_folders=()
-while IFS= read -r line; do
-    [ -n "$line" ] && unique_folders+=("$line")
-done < <(printf "%s\n" "${target_folders[@]}" | sort -u)
-
-for folder in "${unique_folders[@]}"; do
-if [ -d "$folder" ]; then
-    cp "$LUA_FILE" "$folder/Termux_SuperFixLag.lua" 2>/dev/null
-
-    if [ -f "$folder/Termux_SuperFixLag.lua" ]; then  
-        echo -e "${GREEN} -> [OK] Đã nạp thành công vào: $folder${RESET}"  
-        success_count=$((success_count + 1))  
-    else  
-        echo -e "${RED} -> [LỖI] Không thể ghi file vào: $folder (Ghi thất bại)${RESET}"  
-    fi  
-fi
-done
-
-if [ $success_count -gt 0 ]; then
-    echo -e "\n${BOLD}${GREEN}THÀNH CÔNG! Đã phủ rộng và xác thực an toàn file Lua.${RESET}"
-else
-    echo -e "\n${RED}[CẢNH BÁO] Không phát hiện folder tự động chạy nào. Đang tạo folder mặc định...${RESET}"
-    mkdir -p /sdcard/Delta/Autoexecute 2>/dev/null
-    cp "$LUA_FILE" /sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua 2>/dev/null
-    if [ -f "/sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua" ]; then
-        echo -e "${GREEN}-> Đã cố định tại /sdcard/Delta/Autoexecute thành công!${RESET}"
-    else
-        echo -e "${RED}-> Thất bại nghiêm trọng: Vui lòng cấp quyền bộ nhớ cho Termux!${RESET}"
-    fi
-fi
-sleep 3
-}
-
-# ===== [OPTION 6] BƠM SCRIPT CÀY THUÊ GUI NỘI BỘ =====
-menu_cay_thue_script() {
-clear
-echo -e "${BOLD}${YELLOW}--- [6] TỰ ĐỘNG BƠM SCRIPT CÀY THUÊ HÌNH ẢNH (V2) ---${RESET}"
-
-if [ ${#selected_clients[@]} -eq 0 ]; then
-    echo -e "${RED}Lỗi: Bạn chưa chọn Nick ở Option 2!${RESET}"
-    sleep 2; return
-fi
-
-local LUA_FILE_CAY="/sdcard/Termux_CayThueV2.lua"
-
-cat << 'EOL' > "$LUA_FILE_CAY"
---[[
-    SCRIPT CÀY THUÊ CHO ĐIỆN THOẠI (BẢN V2 - CÓ HIỂN THỊ TÊN ẨN DẤU SAO)
-    Chạy bằng Tool/Executor trên điện thoại.
---]]
-
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local PlayerGui = player:WaitForChild("PlayerGui")
-
--- Hàm ẩn 4 ký tự cuối của tên người chơi
-local function cheTen(username)
-	local doDai = string.len(username)
-	if doDai <= 4 then
-		return "***"
-	else
-		local phanDau = string.sub(username, 1, doDai - 4)
-		return phanDau .. "****"
-	end
-end
-
-local tenDaChe = cheTen(player.Name)
-
--- 1. Xóa UI cũ nếu đã tồn tại
-if PlayerGui:FindFirstChild("MobileTracker") then
-	PlayerGui.MobileTracker:Destroy()
-end
-
--- 2. Khởi tạo Giao diện
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MobileTracker"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = PlayerGui
-
--- Nút "Menu Cày" ở góc trên bên trái
-local BtnToggle = Instance.new("TextButton")
-BtnToggle.Name = "BtnToggle"
-BtnToggle.Size = UDim2.new(0, 130, 0, 45)
-BtnToggle.Position = UDim2.new(0, 15, 0, 15)
-BtnToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-BtnToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-BtnToggle.TextSize = 16
-BtnToggle.Font = Enum.Font.SourceSansBold
-BtnToggle.Text = "Menu Cày"
-BtnToggle.Parent = ScreenGui
-
--- Bảng Menu nhập liệu
-local Menu = Instance.new("Frame")
-Menu.Name = "Menu"
-Menu.Size = UDim2.new(0, 260, 0, 190)
-Menu.Position = UDim2.new(0, 15, 0, 70)
-Menu.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Menu.BorderSizePixel = 2
-Menu.Visible = false
-Menu.Parent = ScreenGui
-
--- Ô gõ chữ
-local Input = Instance.new("TextBox")
-Input.Name = "Input"
-Input.Size = UDim2.new(0, 240, 0, 40)
-Input.Position = UDim2.new(0, 10, 0, 15)
-Input.PlaceholderText = "Nhập mục tiêu (vd: 1b Beli)..."
-Input.Text = ""
-Input.TextSize = 14
-Input.Parent = Menu
-
--- Nút Lưu lại
-local BtnSave = Instance.new("TextButton")
-BtnSave.Name = "BtnSave"
-BtnSave.Size = UDim2.new(0, 240, 0, 40)
-BtnSave.Position = UDim2.new(0, 10, 0, 65)
-BtnSave.BackgroundColor3 = Color3.fromRGB(0, 140, 0)
-BtnSave.TextColor3 = Color3.fromRGB(255, 255, 255)
-BtnSave.TextSize = 16
-BtnSave.Font = Enum.Font.SourceSansBold
-BtnSave.Text = "Lưu mục tiêu"
-BtnSave.Parent = Menu
-
--- Dòng hiển thị chữ (Có chứa tên người chơi)
-local HienThi = Instance.new("TextLabel")
-HienThi.Name = "HienThi"
-HienThi.Size = UDim2.new(0, 240, 0, 50)
-HienThi.Position = UDim2.new(0, 10, 0, 120)
-HienThi.BackgroundTransparency = 1
-HienThi.TextColor3 = Color3.fromRGB(255, 255, 0)
-HienThi.TextSize = 16
-HienThi.TextWrapped = true
-
--- Đọc dữ liệu cũ từ bộ nhớ máy
-local SavedText = listfiles and pcall(function() return readfile("caythue_data.txt") end) and readfile("caythue_data.txt") or "Chưa nhập gì"
-HienThi.Text = "[" .. tenDaChe .. "]: " .. SavedText
-HienThi.Parent = Menu
-
--- 3. Logic xử lý tương tác
-BtnToggle.MouseButton1Click:Connect(function()
-	Menu.Visible = not Menu.Visible
-end)
-
-BtnSave.MouseButton1Click:Connect(function()
-	local text = Input.Text
-	if text ~= "" then
-		-- Hiển thị cấu trúc dạng [Tên***]: Nội dung cày
-		HienThi.Text = "[" .. tenDaChe .. "]: " .. text
-		Input.Text = ""
-		
-		-- Ghi đè vào bộ nhớ máy để mang sang server khác
-		if writefile then
-			pcall(function()
-				writefile("caythue_data.txt", text)
-			end)
-		end
-	end
-end)
-EOL
-
-echo -e "${CYAN}Đang tiến hành tìm kiếm và dán Script Cày Thuê Gui vào Autoexecute...${RESET}"
-local success_count=0
-
-local paths=(
-"/sdcard/Delta/Autoexecute"
-"/sdcard/Fluxus/Autoexecute"
-"/sdcard/VegaX/Autoexecute"
-"/sdcard/ArceusX/Autoexecute"
-"/sdcard/Codex/Autoexecute"
-"/sdcard/Cryptic/Autoexecute"
-"/sdcard/com.roblox.client/files/autoexec"
-)
-
-local -a target_folders=()
-for p in "${paths[@]}"; do [ -d "$p" ] && target_folders+=("$p"); done
-
-while IFS= read -r found; do
-    [ -n "$found" ] && target_folders+=("$found")
-done < <(
-    find /sdcard \
-        \( -iname "Autoexecute" -o -iname "autoexec" \) \
-        -type d 2>/dev/null
-)
-
-local -a unique_folders=()
-while IFS= read -r line; do
-    [ -n "$line" ] && unique_folders+=("$line")
-done < <(printf "%s\n" "${target_folders[@]}" | sort -u)
-
-for folder in "${unique_folders[@]}"; do
-if [ -d "$folder" ]; then
-    cp "$LUA_FILE_CAY" "$folder/Termux_CayThueV2.lua" 2>/dev/null
-
-    if [ -f "$folder/Termux_CayThueV2.lua" ]; then  
-        echo -e "${GREEN} -> [OK] Đã dán thành công vào: $folder${RESET}"  
-        success_count=$((success_count + 1))  
-    fi  
-fi
-done
-
-if [ $success_count -gt 0 ]; then
-    echo -e "\n${BOLD}${GREEN}HOÀN THÀNH! Bản script Cày Thuê đã nạp sẵn sàng vào Executor!${RESET}"
-else
-    echo -e "\n${RED}[CẢNH BÁO] Không tìm thấy thư mục chạy tự động. Thử cố định mặc định...${RESET}"
-    mkdir -p /sdcard/Delta/Autoexecute 2>/dev/null
-    cp "$LUA_FILE_CAY" /sdcard/Delta/Autoexecute/Termux_CayThueV2.lua 2>/dev/null
-    if [ -f "/sdcard/Delta/Autoexecute/Termux_CayThueV2.lua" ]; then
-        echo -e "${GREEN}-> Đã tạo tại /sdcard/Delta/Autoexecute thành công!${RESET}"
-    fi
-fi
-sleep 3
-}
-
-# ===== CÁC HÀM CHỌN NICK & CÀI ĐẶT MAP =====
-menu_choose_client() {
-clear
-echo -e "${BOLD}${YELLOW}--- [2] CHỌN APP / NICK ---${RESET}"
-local lines=$(pm list packages 2>/dev/null | grep -vE "com.android|com.google|android.ext|com.qualcomm|com.miui|com.termux" | tr -d '\r')
-local -a pkgs=()
-while IFS= read -r l; do pkg=$(echo "$l" | awk -F':' '{print $2}' | tr -d '[:space:]'); [ -n "$pkg" ] && pkgs+=("$pkg"); done <<< "$lines"
-
-for (( i=0; i<${#pkgs[@]}; i++ )); do echo -e "  $((i+1))) ${pkgs[$i]}"; done
-echo -e "  0) Treo TẤT CẢ"
-
-read -r -p "Chọn số (Cách nhau bằng dấu cách): " choices
-if [ -z "$choices" ]; then return; fi
-
-selected_clients=()
-if [ "$choices" == "0" ]; then selected_clients=("${pkgs[@]}");
-else
-    for num in $choices; do
-        if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#pkgs[@]}" ]; then
-            selected_clients+=("${pkgs[$((num-1))]}")
-        fi
-    done
-fi
-for i in "${!selected_clients[@]}"; do client_places[$i]="$PLACE_ID"; client_vips[$i]="$VIP_LINK"; done
-echo "Đã lưu ${#selected_clients[@]} nick thành công!"; sleep 1
-}
-
-menu_setup_game() {
-clear; echo -e "${BOLD}${YELLOW}--- [3] CÀI MAP & VIP ---${RESET}"
-read -r -p "Nhập Place ID (Mặc định Blox Fruits): " p_id
-[ -z "$p_id" ] && p_id="2753915549"
-PLACE_ID=$(echo "$p_id" | tr -d '[:space:]\r')
-
-read -r -p "Nhập/Dán Link VIP (Hoặc nhập 0 nếu dùng SV Thường): " v_link
-[ -z "$v_link" ] && v_link="0"
-VIP_LINK=$(echo "$v_link" | tr -d '[:space:]\r')
-
-for i in "${!selected_clients[@]}"; do
-    client_places[$i]=$PLACE_ID
-    client_vips[$i]=$VIP_LINK
-done
-echo -e "${GREEN}Đã cấu hình dữ liệu Map & VIP thành công!${RESET}"
-sleep 1
-}
-
-menu_lock_fps() {
-clear
-echo -e "${BOLD}${YELLOW}--- [4] THIẾT LẬP MỨC FPS CẦN KHÓA ---${RESET}"
-read -r -p "Nhập mức FPS mong muốn (Khuyên dùng từ 15 đến 25): " fps_val
-if [[ "$fps_val" =~ ^[0-9]+$ ]] && [ "$fps_val" -gt 0 ]; then
-    TARGET_FPS="$fps_val"
-    echo -e "${GREEN}-> Đã ghi nhận mức khóa: $TARGET_FPS FPS! Hãy chạy Option 5 để nạp code.${RESET}"
-fi
-sleep 2
-}
-
-# ===== XỬ LÝ RAM CẤP ĐỘ HỆ THỐNG =====
-get_sys_ram() {
-local mems=($(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} /MemFree/ {f=$2} /^Cached/ {c=$2} END {if(a=="") a=f+c; print int((t-a)/1024)"#"int(t/1024)}' /proc/meminfo 2>/dev/null | tr '#' ' '))
-echo "${mems[0]}MB / ${mems[1]}MB"
-}
-
-get_app_ram() {
-    local pkg="$1"
-    local raw_mem=$(/system/bin/dumpsys meminfo 2>/dev/null | grep -m 1 "$pkg (pid" | awk '{print $1}' | tr -d 'K:,')
-    
-    if [[ "$raw_mem" =~ ^[0-9]+$ ]] && [ "$raw_mem" -gt 0 ]; then
-        echo $((raw_mem / 1024))
-    else
-        echo "0"
-    fi
-}
-
-# ===== CHECK DISCONNECT SIÊU CHUẨN =====
-check_running() {
-    local pkg="$1"
-    local mem=$(get_app_ram "$pkg")
-
-    # Đã giữ nguyên mốc chặn 750MB chuẩn để né kẹt sảnh chờ 682MB
-    if [ "$mem" -gt 750 ]; then
-        if logcat -d -t 50 2>/dev/null | grep "$pkg" | grep -q -iE "disconnected|kick|connection lost|error code|connection timed out"; then
-            am force-stop "$pkg" >/dev/null 2>&1
-            logcat -c 2>/dev/null
-            return 1
-        fi
-        return 0
-    fi
-    return 1
-}
-
-# ===== HÀM MỞ NICK SẠCH SẼ =====
-launch_client() {
-local pkg="$1"; local place_id="$2"; local vip_link="$3"
-am force-stop "$pkg" >/dev/null 2>&1
-sleep 1
-
-local clean_code=""
-if [ -n "$vip_link" ] && [ "$vip_link" != "0" ]; then
-    if echo "$vip_link" | grep -q "privateServerLinkCode="; then
-        clean_code=$(echo "$vip_link" | grep -o 'privateServerLinkCode=[^&]*' | cut -d'=' -f2)
-    elif echo "$vip_link" | grep -q "code="; then
-        clean_code=$(echo "$vip_link" | grep -o 'code=[^&]*' | cut -d'=' -f2)
-    else 
-        clean_code="$vip_link" 
-    fi
-fi
-
-local uri="roblox://placeId=${place_id}"
-[ -n "$clean_code" ] && uri="${uri}&linkCode=${clean_code}"
-
-monkey -p "$pkg" -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1
-sleep 15
-
-am start -p "$pkg" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
-am start -n "$pkg/com.roblox.client.ActivitySplash" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
-}
-
-# ===== LUỒNG CHẠY CHÍNH VỚI DASHBOARD TĨNH =====
-start_farm() {
-if [ ${#selected_clients[@]} -eq 0 ]; then return; fi
-clear
-
-echo -e "${YELLOW}=== ĐANG KHỞI CHẠY TUẦN TỰ DANH SÁCH CLIENT ===${RESET}"
-for i in "${!selected_clients[@]}"; do
-local pkg="${selected_clients[$i]}"
-echo -e "Kích hoạt luồng game thứ $((i+1)): ${CYAN}$pkg${RESET}..."
-launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"
-echo -e "${YELLOW}>> Đang chờ thêm 30 giây để game load ổn định...${RESET}"
-sleep 30
-done
-
-clear
-logcat -c 2>/dev/null
-
-while true; do
-printf "\e[H"
-local sys_ram=$(get_sys_ram)
-
-echo -e "${CYAN}==================================================================${RESET}"  
-echo -e "                 LIVE DASHBOARD TĨNH - ĐỨC THỊNH ULTRA REJOIN     ${RESET}"  
-echo -e "${CYAN}==================================================================${RESET}"  
-echo -e "${YELLOW}>> Máy ảo: ${BOLD}${CYAN}${sys_ram}${RESET} | Đang cày: ${GREEN}${#selected_clients[@]} Nick${RESET} | FPS cấu hình: ${YELLOW}$TARGET_FPS${RESET}"  
-echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
-echo -e "${BOLD}TÊN FILE APP              | TRẠNG THÁI     | RAM ALLOCATED        ${RESET}"  
-echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
-  
-for i in "${!selected_clients[@]}"; do  
-  local pkg="${selected_clients[$i]}"  
-  local short_pkg="${pkg:0:23}"  
-    
-  if check_running "$pkg"; then  
-    local app_ram=$(get_app_ram "$pkg")  
-    printf "%-25s | ${GREEN}Đang hoạt động${RESET} | ${YELLOW}%-4s MB${RESET}\n" "$short_pkg" "$app_ram"  
-  else  
-    printf "%-25s | ${RED}Đang Rejoin...${RESET} | %-7s\n" "$short_pkg" "0 MB"  
-    launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"  
-    sleep 30  
-  fi  
-done  
-  
-echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
-echo -e "Giữ nút Ctrl + C để dừng Tool."  
-sleep $CHECK_INTERVAL
-done
-}
-
-# ===== KHỞI CHẠY VÒNG LẶP MENU =====
-while true; do
-    draw_menu
-    read -r -p ">> Nhập lệnh: " m
-    case $m in
-        1) start_farm ;;
-        2) menu_choose_client ;;
-        3) menu_setup_game ;;
-        4) menu_lock_fps ;;
-        5) super_fix_lag ;;
-        6) menu_cay_thue_script ;;
-        0) clear; exit 0 ;;
-    esac
-done
+ELF�h
+     @@|@8
+@@@@0ppp��[�[h�@����]�^@�[�[pR�td�[�[h�P�td
+
+
+�__libc_init__cxa_atexit__register_atforkstatmemsetgetpidsprintfgetenvstrlenstrdupputenvsscanfenvironstderrfprintfexitatolltimememcmpcallocmal]0]8]@]H]P]X]`]hp]rrnostx]rrorlibc.soLIBC/data/data/com.termux/files/u]
+�]bin/../../usr/liblibdl.so�\�\]��
+  �]
+    �]�]�]�]�]�]�]�]�]�]�]E: neither argv[0] nor $_ works.%s%s%s: %s
+_x%lx=%lu %d<null>: %lu %d%c;|\���������H �4�P�h\�<����zR|
+                                                          �X-H@H                                                                       ��8�L�`,t�T-H H
+         ���t
+              H-D����� `�D �X�D �(�<�D�L
+                                         ���
+                                            �L�����D �(0��D H
+                                                              ���
+                                                                  H���\(p��D�H
+       ���                                                                       �H��(��
+                DPH
+                   ���
+                      PH���$�������?#����{����(�)��yF�)}F�������=�T Ո��
+                                                                      �"�����B�F�P�_$�`�����_�_$��� ��� ��sH_$� �csH?#��{���O���3�(�szF}F��C��.�)� ?���t����OA��{¨�#��_�h�.9h�.9h�    .9i�(   n9)     n9�     *i�)
+.��h�(  �9*i�)  .H��5�_���������@����@q
+@9�O9�O@9j�Hn9
+
+k�}          H.9�@�l    n9�@��
+ �l8Hn9
+
+      H.9Hn9*�  �
+                @9k     n9�
+                           *�   �k
+                                  �h9�O@9Jn9)
+�(9i�(  n(      .���5�@����@q���������_���������@����@q�Ti�(    n(    ..��J    n9*h�
+    �J@9�O9�O@9k�jn9J
+
+                     j.9jn9�
+*�J
+   �J@9,        n9�
+��9�O@9kn9�        *��
+           *�k
+              �j9)      n9
+ii8�O@9)
+
+�O9�O@9
+ii8�@�(@9
+J(9�@����@q���������_����{����������_��C����������C������*���@��O@����K@��
+   ��[@���@��+��@��/��c@��#��w@��7��@��?��R[��������_���@��{R����_�������
+  ��@�  �R�����@@�      �R��(��@@��
+                                   @�   ������@��6�@!�������@�  �R�
+                                                                   ������
+  ��
+    @�h6�@@��@�(��@!����������_��{���
+                                     �����      � Ո
+                                                    �)����      ������5��}@��C����+������@��@���� �@b���R����@��R�'������@��'@�=����+@��c��� Ձ����@�!����@��!��*�G����G���c���        ��+@���_�����!(�
+                                                        ��@������%������!\(��#����c���?��?@�   q�T�'@��+@�     �AT(�F�@����G@��*)
+k)q�)�n�����_��C@�      ��������_���    ��
+                                          @��{¨�_��_����{
+                                                         �����C������@����\��������'������\�H�(�F�@�����!@'��� �R���C_�z������{���H��� ըS�Y� �R�����[�i���    ��R�����[�!�R������[x9h4 �`Q���/��������/��
+Ti��� ��O       ����0 �HO��)�!�R�����@�)���     �a�R�����@����� ���R�����@�ɚ�� �!�R�����@�)��� ��'���R�G������G@��'@�O����@��G@�)���   ��+������'@��+@���җ�4)��� ��I  ��������� I     �a�Ry�����]�6���� ��G   ������C_�      )�      *}@���~������\���������]�h
+4i��� �HE       ��!�RZ����@9�5 D)������4 �H)�����       ��� ՈB�
+                                                               �      �!�RD����
+        @��1����R@����
+                      @�        ���     ���a�R��9����@��@������
+                                                               @��@�I���       ���0����@��@�b��<�4     ��� �h> ���������:����^��������^����R���^�@����� ��;�1�-����� �(;      @9H4@������^��������^��\����� 9 ����\����C���^@���\��C���
+*k�C�(y*���]�h4 ��� �Hii8�4��\��C���
+�C�
+   ��� ��4
+         �(y*�)��� �(4  @9�4��\��C���
+�C�+��� ը2
+         �(y*��^���\��C���
+*k�C�(y*�ɚ�� 1  @9�4��\��C���
+�C�˚�� Ո/
+        �(y*���]q�T��]����*���@������]��C_�     k�T��^������    *J��yi���\��C���
+*k�C�(y*������\��C����(y*���\� �h*)������@������_��{K����_��C��{�������������_��_������_��(�F@����_@�����
+@�����)�'����Q(�J������@��4��@����
+                                  �����'��
+                                          ��
+                                            @����_@����_@������5(����@���^��@��@��@�����!�'�?� �R�{D��C��_��{��0��F��4� � � � �0��F��4� �0��F��4� �0��F�5� �0��F�"5� �0��F�B5� �0��F�b5� �0��F��5� �0��F��5� �0��F��5� �0��F��5� �0��F�6� �0��F�"6� �0��F�B6� �0��F�b6� �0��F��6� �0��F��6� �0��F��6� �0��F��6� �0��F�7� �0��F�"7� �0��F�B7� �0��F�b7� �0��F��7� �����o    ���o�(]
+
+���o����o����o����o��������������������������������To���}4      �     8
+                                                                      �z�,i�OM�7N+J}����m��)�P�h��溡���l9��e���*x/��Gງ�B��5y�r� �9���,k����?k��Bp����è���Q�E�3Nk�.�����R[�3AM����at^��_���O�K��Z4^�h}4�%����&{���o��pG[]LF�y�!kN�����$�U�}�T���zц�WɎ,��5�A���1�mV��)k�~�%���#�@�l��+%@�r|���tT �4K�'�;��`��[!�Hy_��Uu-�:q[�y�J����p!�j[u-cf�ؔ��/f*#�ߩ�9�-�n�*��X��
+                                                      Н�R`hp�ّ���d)xʬQ_��w�gL>^8~R9!o��8~]̑YZQ��*o�����CR����ócvC��h���ئɣ�8|�W�<��0cN�ڑ/�2�W+Z/�#ң\O_|�!qB6z��:cC�s�'
+                     =Sem%�@��(b6J�x�M�Xb���먼_��j�7�9\Yy&N�?�v�t&X�D���?�
+   ��E!7�Gwǖ0��KSp�z��hw�����c�����M�cg���U�Jƞŏe-��?O��VA�]ƅ$�Ӳ�:H�1�h|dA�kn�H��܋�2͟��%�'�g2��dN�!���7�=�ؖ�h*�Qńo�5\�$=69^ܺ��,+)�3��i���  n
+                                                                 xg@��Ĳ��_ئN�){SrKT�'���D�?P:���jU{kQg�)7�-y���qူ1�W��.ig��u����8�O��{a��ȷj�;,�;Z�T�iJ� ��o�_���b��+�=��i[*�j�
+{u��]|�                        �V��w�`���G�����Ղ�1�G�z`�`��
+����P&�!È]+c������3��@���Νux�ƞI�b�D���a�eѶe�����<������2?�
+                                                   P#���"?Ѕ�i�}��34\���ݦ'�S2�v��`�0^'Ff5�1�����[z�EXGm雟�U�r/��������HmcG"6�����V���KM={�    ��:��|�a:I-�ImQ�/x*      jaԶ�1��:��8�p�� y�{���˖�@���`]��̲�Q
+=���A��|M�0ʕ�߿�(-�zFª����*ˡi|[W�b-�3�Z  ��j�����Wت��uN)�&�/����#��)z�f`���+=�ᄭcϪ��"���s��)[���ٶF)�K�,E?�����j��U�\X%�n��a���}"b/��b�<&��~`<
+v����xb�5By|)?�x�����(����M�V`m3���M�;�|�J�C�lp��1�
+                                          pҢ��%��۔���B%1�*T�A�2�+?f����K@~�����ͨ./�E<�Ն��Ƽ�k�e٭s%��ࣔ�ya7������sc�0�e�D�f�x��pot$�!*�Wa;
+��!'�W)���$≿k;ܶ�w�"d�rȗ��}1��[���� M���;����];H��@F�Q��D��Wm��1��l.�
+                                                                   �d �%i�4.�uu��f
+           ��b
+              �<��Lj���0o��
+0ȷ�=GlT�x���;�:Z����p�5k�?�H�B�>���'̋���!r��i�}0�ce_��,�=����XR"�&:oّ   ��o������
+0S��6��3�����}qz��]��$
+��                    ��ڼJ��vD:"n�����Fr=�
+  ְ� ����,�NCBU��^n���3!�?�<ҽ�l��A8�{�ڒ��O����B����
+        ����H����dk��K��cu($������l���kI@T�P�<:���"F
+                                                    Kk�5tI!W�/F���=<��I�l������ ]aVҫw)��Y�_,ǜI-6�w`Wp��S�]%��O0b�����^ǋUX��tȳu���� ��o�K�
+  v�a��o�2���G�[��Dg����mW
+�!�'n��3?9Փ�i��������{�i���o<N��6$W���ͣ���3>QM���R�Q�f��>��!��ٹ<mJ頉:�`*ֲ�(�`��T1�?��`q�L
+                �HP1��k�:�x�r���/c'aUgǑ��z�j@E��[m��],������?���-��M����3c:�6�Ub���Ǟ�{݄D��&zmsPi�H��
+������
+      ���+��mpjܹ��
+��Ț�4�SyHb�4ׯ/����j�:��rؚ�\����Y����Q>��C��/Ǽ.�OUB���gBV?���
+           ��4^(ħڤa1h9�W�d��R�f��"���\��lYS�ܢ{ʷ��R�}�2�
+���     A>{/�J���z��
+�ۜ6����:�A�+kiN�00*l{�Ƃψo˕��+{xC�ǆ���MC�`*W+�c-�Cs��:"���J��~�~Mބ�o�^a�w�\�Z��`�{����A�1ն�LM����A4�sǨa{==N���kW=$|�v��<�=
+����{<)=�-�H��`�ry��4�7����TAK���}�v=��'�����7�-�d�'*�  (F��_�Sf�
+                                                                 �Q��C�XS��}��(����&i��i��6�N�D��L��m)��B^�ҹ����7�u��0C,�1|���¾�@��#����m��haF�����
+     �x,���T���Ð�K"T��O,4���Z�������@c��(%T(��M<��x��-J�T�4�5ݞ�!�
+                                                                 �ݿ�`�=D8�$�l��dw'�]�Lx�2��PţX��<l"��d�G�BOW����!k_�6m��'�Z/Ǧr�v�|��<��qEn��>N^J{0+�C]��b�qJ|E��s2MAÄ���ƹ2:s�BN6!���������Fy������#kFS�ة�?�0�4E�-U�&�
+S�AF50o��Ƥ��M��2�n8�J��fr$���\����~C���b�VdDH(Ǖ����
+                                                   �Z�U���-3�ɋ�{W�}7K)h�4���s#�������}1OB"1�
+                     ��RO�U��
+Ž��S����0�1Uo������7�\Iu�I��W2���;���OD=���p8��DK�k�:�349�z|�r�0��c�2H-
+                                                                      U��Nej����o�G�_y���Gp��z�-��J�9)OQ>7��J�*+�,�t9[�I�:��������� �ɥ�f��M�z���Ǧ��2|Ǩ
+        [�b���)�        Ey[����m�ޖˏh�@��@��51����H����C�W��S(��+�t�[��#'C�cj&�8��z�ZѸ_��z-���\�քe�&"��m���a"�=з����V�)���&:iW��8g�����}^GN�
+                                                                    #eT�����}��dI7�a=�6��~�@�\0�g�����ƜH����
+չ��24XF��+x/����ffy��H�@��9�{/�T�U��g��x�M�G7θk���d��$�'�cR�5j��ԳX=��)��ah߽�~6P�e��.�½;�>`#���q���#�Ya"-T�q/P��9�h�D�e�C��^P�gs�����}G�g�O�7b��#?�#`.{&
+`S�����8���\Z�1n�v="�F�b�s�݂��L\��վ�_����Id�>�*g        t؊�(T7�L�A�v�)��};{B�A���^�����)��v8[hj$&���A
+                                �T�1�-j��"z�ٜ    �>�Y2?D�r� �6M��<$0-�\sg��6���ev�������#�(�r���]:*V�V���l��:y��lce6���[�07�k�َ��Pʣ%�M�7���6����w4�I3y�-���|��L�����
+                    '�釚Q`�ӈyBd��E90��Z^qB4���Z<UZl/�)�1��Pw��J $6�?�Ҵ=wQ���O_B�E�
+�
+ O")H��i���cCM�*�KV'C�<�=�Aj��d�䈘`�/k���v<$���:        ���嫮�#soe7����&}y�M)���jRax���r��0�V��ӭ</y��*?F�H0�G�ms%1U���3�!&�h.�嚮�ۈ�
+                                                            )��f�A
+�o�w��j�ڎz�2ʛ*D�@q����Mz+hG/�O�^�
+                                 z@l0i_6����G�ҏ�y
+                                                 �x:O�ۡ&4����c�&�My���]ٛ���<���@�D�0���4V�����f��,�,�{k���/���z���8Q     6I�S��ձُ���4Hm�h��M2���<G��h���v|ރk���C�<��VرwlJ�ߴ�x���*)5�_W��|~/�aA9wn"�$�s$
+                                                  ���7?�d���\�FdT˘k�G32p�,���
+      ��P�G0~z���x�V/�]q5�&Pg�����ވ{�SMC��}ea�
+����@A*�ܬT������� 3�2�!��{����$���
+�I]�jm��G'ÒHI��
+               �e/k�
+�J7�49N��G�Ȓ�]a��r�U�qz�v_!�O�Æ:4Y �7<���B��"���!��TρRhs#ϳ��8)�}$f"̓�6>e,��     r��Ni��'g��ʏ���F;^�që�볮�]�r��=�>�      n�s5�U
+����\�ţ�p��|��j��l���*a�
+                        ��4u�g�-���w�$B��X>�|!D���zpKjH8M�kC��>�=e6ʺK�B{���4G׃<ǈ����<yt3�▟QŜB��1�      ��Y�)�z>
+�u      K7f�A>�!�m�`�(��ߛF$H�Zi�bѼ$��"�-z>n�HK�vm����g�%���\],3fV� �fQC����"?K1��(�|�푭�
+�<}gP�M+j        ��ʾ�.�}�h�n^�H����T'd�D
+Ј���,�
+,8&l|���N�v��N����x���o��Z���w���Y�t���
+           q�WA��Ľ�H9>K%�yk�`�����
+                                       ��m�T���~6�>@]0�i����ce�82?M0�����-���H?X˨LH%;�bN�;֥�0��jē,]���`*�/It;
+                                     T�Q�
+                                         /mM4�K��w����1 �C��d��ql�6(Z��ۖ�&�.$�L�Z�L~�J�cZ�H�H��2���5��6��9�0U�]tb&����x��UC}�)�"�.�i=��U]D�n�7
+Ѩ��i��2�����*�%|wrqvs_pl�<^���vM9\
+                                  �Lv��U-���
+                                            2Epu
+�CY
+Ob�?
+��p�*o�dD����׀@N6�5W���t��(��L��n<[�p�9Y|8ӘJ��Mo!`��r��8s�(r3h�ޫs!���UV���V��_�o�yik-����:{�@�q�� k�@��L�j'�    �Hz-�o�?�}a0��H�;șFE���l/
+                                                                 ��Z�̒�����'bvU#ӹ���NF�Rt�Kf�x!D�Gaq47���݊mC�4G��ٝ��1!6־�g-Aok�1!9�[�v�}Έn,o\w�x��C����]�*���O�eϝ�y�BF   F�ߜ��_�O��*A*��oi"s�ٝ�@堵��hu$��٩4����@���`R1ҡ�Y�n� h�3�Z�f����c�6
+                  ms�����}����u�T�ql���g��
+                                          [���_�x_QǍ�G��cQ(�t��o�ˮ�����Ղ�hT���
+       �.��9�"?#}_UY���|0\�v���{��s��*�
+�?��=�!:�^�խ\/y��`$�c���Z�Ù�M6[��      ���1!`�X
+                                 csw�*�W)��#�dʑ˹xϵk'
+                                                    ��Dd@�!ƌ��չL
+                                                                K�f�B�����?NJn�C��Vp��"���4�5JG_j�O��s���w_��蓖r��^�aAC�`�qw�����~�$�Ȳ��%Ef�����g�����S��:^nh�0�b�0���--�x��Ebq꽦9��:�bJ�|h��0�0p.�+���$փwF2�hD�/qQ�.�@�W�mNeϋus�^�F�:������ ~g�������Rau�֛��EF^$�%��6
+                                                CT�\,��%�r����}5��h2>i٘X�%���C� ���"��K�D��&�&<+~�ߕ����W��K�}���-�s�D���� �I��"ٺ)L��e�G5�I���7%�m��"��1�t2A�b��ah��(oePRM��
+                            ���m�0��+Ѭ��ot��f8Y����qO/�y�ï�2�MF���k�����k�f�*��8o+�6�O�L0��    k�rZ���R[J��[�{U��B���g�P��5lx�a/��
+                 +0
+                   D�4��M��yy��U���>�&��-�ēXOV�]��X��g�y6>w��KE wD�a@�?��i�����+��t�T��9u��g�4�<�
+                          .?0���R��M��.�bC���gHO���G"Ȭ�I/4*J�Cͦ���^~�'6�t�"���
+@)$|�e\�^X�2��<�1P��u�8�<�d���8�%�i�7>c�����>�Owޣ@��tn&R�$��d���#�:WS5:Z�Nh�˨/_n��8ۿ*�yđ��X�?e_@D��M�V
+�ѦE�!�}���,�q�b��ՠ
+                  �!��e̗�N��Uf�!kyJ���Dj
+�Az��W�R;}a����0lq����D�
+                        )���    �x��L�E�\
+                                         � !+��_�C�u���DY��[�ߟ,�ߋ�4\�2�7Hk�u�iWO�=c��|9��D
+���|������u����������O��6��ݯ��t!�\���"�
+                                       ����At�s@���7��M�
+z0\�Wx�<�j�����D�茲�L5I�^�"�ɐ� ��T2�1So����tg�'���mN��,PX��V�����i\?�~%}���    �       ĩ)m�LG��[7���
+                             *�.+�Ħ�2F���r+'�:-0��q���C2�!���V`
+���Jc
+�j~�B����kΗ�/�2�(� �D/7���C�+�JΉ� F��G[�-�R��M�,�h��/ �)�!ĵ������0�zl��,��z�ڙ�"��rۯHé���n"�!�S��ߦ��hΤ�_+���l%��S���mЌ[Q��R↶6%ߞ
+                                                       ��S���Zğ�;Ѐ>�wUd�9�&j��a�pY�,�H����D�C�.��
+                          ���p��؄'m�����,m7昲op;I����:���݆-��~��������C�!�HѨC��|�u�F�d���T<0�{���n;��h��., E����3/v�/)��v���ϟ>�ٮ�_�j���@#���s�I��������TY6��֭�                             �E   �
+                                                 ь{����5T���X�<���S�
+=���
+���T���-'n��N����Z24���nI�aېo˱$71�ܽ[M�J
+��fNd�pWt���[��?g�`�b y���e�8)�G�
+                                 ��i��m)�祻�Ǯ��bH�sr:^�K�.,
+                                                           NՓ g��$L&n{���j*)u�����F�J�<�'e���8���A�"-R�����='Gk4�(���=�iyx`b�^q��M�9P�&����Q ����i����6�Q[�
+��q�7�k�C@��)��qf#A�|��}W�~ P����~C^�@?r�V��    b��X���EKX�3Y�k�
+                                                                6|�O���8�>�k;����z8��|��$����G�Zf��˦KB�uZ��_�!!�
+         ���;��>eJڑ[��⯞Rʑ���V�R-]�5��J}Ua��O��=oʟy�l����_��z9�*�M�0ũ%�� )m�Wr����I��K~�YvɤtCZ���Rr{������{`alX_��P��0��aug���/���b���g�_d�ץ�J�*kǟ���Њ�S���}�*��9�
+                   mu�����[ҫ9�&oBÉ����7�4ܯ(%����Y�r�?��gO���a��"��h�ӝ9fƀ�7!���xI/��-��`Ͻsfnm�˕Ȃu�ݟo���Ů�� ~Vm_8�5�[��GW
+!�.{W!46\�q�ɘ��e��L8�j�~����\�Y2���V��L��a��~C�c�9�'�r<��y�˵v67�9Dqa����/��+�+������N���Ŗ��^��*.�s`���N���E=bk�����SR�ݣ�Sm?<>i�U��O+��J�u=�ޞ'���n���n�z��?K�_�h���䎺����$�Ë��D=JQ(oi�'�!q�����}|�k�r+|��H:���\s$aK��J\�=�    �$"����R�f��>ݬ7kd*+cV]POƹls�
+NX����ay�M
+����    &�a��L���n��Y��r��"}Y���m��3�%�Z��j��3���t����L�Yz��F#`����C$��Z���ۡ����\�P�j�#��J���gNi^�x�BuY|�%?������vv��s���\��
+                                                    ��H�|��̒�����S�u��D��
+�_!�z���ɠ��O`���ir��k��n9ma2`y�h������Q�+'⊨;�����:�͓����NL_&y�1�����
+         ��J����D���VW���[.�ђ��4�hH����<��iz�#A
+�2���aE�?�=#��S�9ԑl^^~.3�[k��:_��LFI~��ei0$YpͶ��>Ğ>�f�����L���8�(�,�Z�H�'�H���g�YHZ���ꆟ}n�:��<���%�Q�˩7X_����j�~K���=E��ܥ�D
+(��e`��O;*���(-���)��)
+g�&b�NnZ���     hz�J����-}�{*��qj,^���̍Pj���Ι�H�Ds�T���"1���S��j&���rﻔ�-B(yR�J����DE�O$g�8��Jrk�������-u#�Ec���sX2H![ϡ��nn�w������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������,8&l|���N�v��N����x���o��Z���w���Y�t���������������������������������������������������������������������������������������������������������������������������������������������������m�T���~6�>@]0�i����ce�82?M0�����-���H?X˨LH%;�bN�;֥�0��jē,]���`*�/It;�����������������������������������������������������������������������T�Q������������������������������������������������������������������������/mM4�K��w����1 �C��d��ql�6(Z��ۖ�&�.$�L�Z�L~�J�cZ�H�H��2���5��6��9�0U�]tb&����x��UC}�)�"�.�i=��U]D�n�7�Ѩ��i��2�����*�%|wrqvs_pl�<^���vM9\������������������������������������������������������������������������Lv��U-��������������������������������������������������������������������������2Epu������������������������CY��������������������������������������������������������������������Ob�?���������������������������������������������������������������������p�*o�dD����׀@N6�5W���t��(��L��n<[�p�9Y|8ӘJ��Mo!`��r��8s�(r3h�ޫs!���UV���V��_�o�yik-����:{�@�q�� k�@��L�j'������Hz-�o�?�}a0��H�;șFE���l/�������������������������������������������������������������������������Z�̒�����'bvU#ӹ���NF�Rt�Kf�x!D�Gaq47���݊mC�4G��ٝ��1!6־�g-Aok�1!9�[�v�}Έn,o\w�x��C����]�*���O�eϝ�y�BF���F�ߜ��_�O��*A*��oi"s�ٝ�@堵��hu$��٩4����@���`R1ҡ�Y�n� h�3�Z�f����c�6�����������������������������������������������������������������������ms�����}����u�T�ql���g�����������������fV� �fQC����"?K1��(�|�푭�                               [���_�x_QǍ�G��cQ(�t��o�ˮ�����Ղ�hT���+j  ��ʾ�.�}�h�n^�H����T'd�D
+Ј���,� �.��9�"?#}_UY���|0\�v���{��s��*�
+�?��=�!:�^�խ\/y��`$�c���Z�Ù�M6[��      ���1!`�X
+           q�WA��Ľ�H9>K%�yk�`����csw�*�W)��#�dʑ˹xϵk'
+                                                    ��Dd@�!ƌ��չL
+                                                                K�f�B�����?NJn�C��Vp��"���4�5JG_j�O��s���w_��蓖r��^�aAC�`�qw�����~�$�Ȳ��%Ef�����g�����S��:^nh�0�b�0���--�x��Ebq꽦9��:�bJ�|h��0�0p.�+���$փwF2�hD�/qQ�.�@�W�mNeϋus�^�F�:������ ~g�������Rau�֛��EF^$�%��6
+                                                CT�\,��%�r����}5��h2>i٘X�%���C� ���"��K�D��&�&<+~�ߕ����W��K�}���-�s�D���� �I��"ٺ)L��e�G5�I���7%�m��"��1�t2A�b��ah��(oePRM��
+                            ���m�0��+Ѭ��ot��f8Y����qO/�y�ï�2�MF���k�����k�f�*��8o+�6�O�L0��    k�rZ���R[J��[�{U��B���g�P��5lx�a/��
+                 +0
+                   D�4��M��yy��U���>�&��-�ēXOV�]��X��g�y6>w��KE wD�a@�?��i�����+��t�T��9u��g�4�<�
+                          .?0���R��M��.�bC���gHO���G"Ȭ�I/4*J�Cͦ���^~�'6�t�"���
+@)$|�e\�^X�2��<�1P��u�8�<�d���8�%�i�7>c�����>�Owޣ@��tn&R�$��d���#�:WS5:Z�Nh�˨/_n��8ۿ*�yđ��X�?e_@D��M�V
+�ѦE�!�}���,�q�b��ՠ
+                  �!��e̗�N��Uf�!kyJ���Dj
+�Az��W�R;}a����0lq����D�
+                        )���    �x��L�E�\
+                                         � !+��_�C�u���DY��[�ߟ,�ߋ�4\�2�7Hk�u�iWO�=c��|9��D
+���|������u����������O��6��ݯ��t!�\���"�
+           
