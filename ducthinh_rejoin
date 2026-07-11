@@ -1,2 +1,490 @@
 #!/data/data/com.termux/files/usr/bin/env bash
-eval $(echo 'CkVMRu+/vWgKICAgICBAQHxAOApAQEBAMHBwcO+/ve+/vVvvv71baO+/vUDvv73vv73vv73vv71d77+9XkDvv71b77+9W3BS77+9dGTvv71b77+9W2jvv71Q77+9dGQKCgrvv71fX2xpYmNfaW5pdF9fY3hhX2F0ZXhpdF9fcmVnaXN0ZXJfYXRmb3Jrc3RhdG1lbXNldGdldHBpZHNwcmludGZnZXRlbnZzdHJsZW5zdHJkdXBwdXRlbnZzc2NhbmZlbnZpcm9uc3RkZXJyZnByaW50ZmV4aXRhdG9sbHRpbWVtZW1jbXBjYWxsb2NtYWxdMF04XUBdSF1QXVhdYF1ocF1ycm5vc3R4XXJyb3JsaWJjLnNvTElCQy9kYXRhL2RhdGEvY29tLnRlcm11eC9maWxlcy91XQrvv71dYmluLy4uLy4uL3Vzci9saWJsaWJkbC5zb++/vVzvv71cXe+/ve+/vQogIO+/vV0KICAgIO+/vV3vv71d77+9Xe+/vV3vv71d77+9Xe+/vV3vv71d77+9Xe+/vV3vv71dRTogbmVpdGhlciBhcmd2WzBdIG5vciAkXyB3b3Jrcy4lcyVzJXM6ICVzCl94JWx4PSVsdSAlZDxudWxsPjogJWx1ICVkJWM7fFzvv73vv73vv73vv73vv73vv73vv73vv73vv71IIO+/vTTvv71Q77+9aFzvv70877+977+977+977+9elJ8CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71YLUhASCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg77+977+9OO+/vUzvv71gLHTvv71ULUggSAogICAgICAgICDvv73vv73vv710CiAgICAgICAgICAgICAgSC1E77+977+977+977+977+9IGDvv71EIO+/vVjvv71EIO+/vSjvv70877+9RO+/vUwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73vv73vv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71M77+977+977+977+977+9RCDvv70oMO+/ve+/vUQgSAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIO+/ve+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBI77+977+977+9XChw77+977+9RO+/vUgKICAgICAgIO+/ve+/ve+/vSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg77+9SO+/ve+/vSjvv73vv70KICAgICAgICAgICAgICAgIERQSAogICAgICAgICAgICAgICAgICAg77+977+977+9CiAgICAgICAgICAgICAgICAgICAgICBQSO+/ve+/ve+/vSTvv73vv73vv73vv73vv73vv73vv70/I++/ve+/ve+/ve+/vXvvv73vv73vv73vv70o77+9Ke+/ve+/vXlG77+9KX1G77+977+977+977+977+977+977+9Pe+/vVQg1Yjvv73vv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIO+/vSLvv73vv73vv73vv73vv71C77+9Ru+/vVDvv71fJO+/vWDvv73vv73vv73vv73vv71f77+9XyTvv73vv73vv70g77+977+977+9IO+/ve+/vXNIXyTvv70g77+9Y3NIPyPvv73vv71777+977+977+9T++/ve+/ve+/vTPvv70o77+9c3pGfUbvv73vv71D77+977+9Lu+/vSnvv70gP++/ve+/ve+/vXTvv73vv73vv73vv71PQe+/ve+/vXvCqO+/vSPvv73vv71f77+9aO+/vS45aO+/vS45aO+/vSAgICAuOWnvv70oICAgbjkpICAgICBuOe+/vSAgICAgKmnvv70pCi7vv73vv71o77+9KCAg77+9OSpp77+9KSAgLkjvv73vv70177+9X++/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vUDvv73vv73vv73vv71AcQpAOe+/vU8577+9T0A5au+/vUhuOQoKa++/vX0gICAgICAgICAgSC4577+9QO+/vWwgICAgbjnvv71A77+977+9CiDvv71sOEhuOQoKICAgICAgSC45SG45Ku+/vSAg77+9CiAgICAgICAgICAgICAgICBAOWsgICAgIG4577+9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICrvv70gICDvv71rCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71oOe+/vU9AOUpuOSkK77+9KDlp77+9KCAgbiggICAgICAu77+977+977+9Ne+/vUDvv73vv73vv73vv71Ace+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vV/vv73vv73vv73vv73vv73vv73vv73vv73vv71A77+977+977+977+9QHHvv71Uae+/vSggICAgbiggICAgLi7vv73vv71KICAgIG45Kmjvv70KICAgIO+/vUpAOe+/vU8577+9T0A5a++/vWpuOUoKCiAgICAgICAgICAgICAgICAgICAgIGouOWpuOe+/vQoq77+9SgogICDvv71KQDksICAgICAgICBuOe+/vQrvv73vv70577+9T0A5a24577+9ICAgICAgICAq77+977+9CiAgICAgICAgICAgKu+/vWsKICAgICAgICAgICAgICDvv71qOSkgICAgICBuOQppaTjvv71PQDkpCgrvv71POe+/vU9AOQppaTjvv71A77+9KEA5CkooOe+/vUDvv73vv73vv73vv71Ace+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vV/vv73vv73vv73vv71777+977+977+977+977+977+977+977+977+977+9X++/ve+/vUPvv73vv73vv73vv73vv73vv73vv73vv73vv73vv71D77+977+977+977+977+977+9Ku+/ve+/ve+/vUDvv73vv71PQO+/ve+/ve+/ve+/vUtA77+977+9CiAgIO+/ve+/vVtA77+977+977+9QO+/ve+/vSvvv73vv71A77+977+9L++/ve+/vWNA77+977+9I++/ve+/vXdA77+977+9N++/ve+/vX9A77+977+9P++/ve+/vVJb77+977+977+977+977+977+977+977+9X++/ve+/ve+/vUDvv73vv717Uu+/ve+/ve+/ve+/vV/vv73vv73vv73vv73vv73vv73vv70KICDvv73vv71A77+9ICDvv71S77+977+977+977+977+9QEDvv70gICAgICDvv71S77+977+9KO+/ve+/vUBA77+977+9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQO+/vSAgIO+/ve+/ve+/ve+/ve+/ve+/vUDvv73vv70277+9QCHvv73vv73vv73vv73vv73vv73vv71A77+9ICDvv71S77+9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73vv73vv73vv73vv73vv70KICDvv73vv70KICAgIEDvv71oNu+/vUBA77+977+9QO+/vSjvv73vv71AIe+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vV/vv73vv71777+977+977+9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73vv73vv73vv73vv70gICAgICDvv70g1YgKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIO+/vSnvv73vv73vv73vv70gICAgICDvv73vv73vv73vv73vv73vv70177+977+9fUDvv73vv71D77+977+977+977+9K++/ve+/ve+/ve+/ve+/ve+/vUDvv73vv71A77+977+977+977+9IO+/vUBi77+977+977+9Uu+/ve+/ve+/ve+/vUDvv73vv71S77+9J++/ve+/ve+/ve+/ve+/ve+/vUDvv73vv70nQO+/vT3vv73vv73vv73vv70rQO+/ve+/vWPvv73vv73vv70g1YHvv73vv73vv73vv71A77+9Ie+/ve+/ve+/ve+/vUDvv73vv70h77+977+9Ku+/vUfvv73vv73vv73vv71H77+977+977+9Y++/ve+/ve+/vSAgICAgICAg77+977+9K0Dvv73vv73vv71f77+977+977+977+977+9ISjvv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73vv71A77+977+977+977+977+977+9Je+/ve+/ve+/ve+/ve+/ve+/vSFcKO+/ve+/vSPvv73vv73vv73vv71j77+977+977+9P++/ve+/vT9A77+9ICAgce+/vVTvv70nQO+/ve+/vStA77+9ICAgICDvv71BVCjvv71G77+9QO+/ve+/ve+/ve+/vUdA77+977+9KikKaylx77+9Ke+/vW7vv73vv73vv73vv73vv71f77+977+9Q0Dvv70gICAgICDvv73vv73vv73vv73vv73vv73vv73vv71f77+977+977+9ICAgIO+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBA77+977+9e8Ko77+9X++/ve+/vV/vv73vv73vv73vv717CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIO+/ve+/ve+/ve+/ve+/vUPvv73vv73vv73vv73vv73vv71A77+977+977+977+9XO+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vSfvv73vv73vv73vv73vv73vv71c77+9SO+/vSjvv71G77+9QO+/ve+/ve+/ve+/ve+/vSFAJ++/ve+/ve+/vSDvv71S77+977+977+9Q1/vv71677+977+977+977+977+977+9e++/ve+/ve+/vUjvv73vv73vv70g1ahT77+9We+/vSDvv71S77+977+977+977+977+9W++/vWnvv73vv73vv70gICAg77+977+9Uu+/ve+/ve+/ve+/ve+/vVvvv70h77+9Uu+/ve+/ve+/ve+/ve+/ve+/vVt4OWg0IO+/vWBR77+977+977+9L++/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vS/vv73vv70KVGnvv73vv73vv70g77+977+9TyAgICAgICDvv73vv73vv73vv70wIO+/vUhP77+977+9Ke+/vSHvv71S77+977+977+977+977+9QO+/vSnvv73vv73vv70gICAgIO+/vWHvv71S77+977+977+977+977+9QO+/ve+/ve+/ve+/ve+/vSDvv73vv73vv71S77+977+977+977+977+9QO+/vcma77+977+9IO+/vSHvv71S77+977+977+977+977+9QO+/vSnvv73vv73vv70g77+977+9J++/ve+/ve+/vVLvv71H77+977+977+977+977+977+9R0Dvv73vv70nQO+/vU/vv73vv73vv73vv71A77+977+9R0Dvv70p77+977+977+9ICAg77+977+9K++/ve+/ve+/ve+/ve+/ve+/vSdA77+977+9K0Dvv73vv73vv73Sl++/vTQp77+977+977+9IO+/ve+/vUkgIO+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vSBJICAgICDvv71h77+9Unnvv73vv73vv73vv73vv71d77+9Nu+/ve+/ve+/ve+/vSDvv73vv71HICAg77+977+977+977+977+977+9Q1/vv70gICAgICAp77+9ICAgICAgKn1A77+977+977+9fu+/ve+/ve+/ve+/ve+/ve+/vVzvv73vv73vv73vv73vv73vv73vv73vv73vv71d77+9aAo0ae+/ve+/ve+/vSDvv71IRSAgICAgICDvv73vv70h77+9Ulrvv73vv73vv73vv71AOe+/vTUgRCnvv73vv73vv73vv73vv73vv700IO+/vUgp77+977+977+977+977+9ICAgICAgIO+/ve+/ve+/vSDViELvv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg77+9ICAgICAg77+9Ie+/vVJE77+977+977+977+9CiAgICAgICAgQO+/ve+/vTHvv73vv73vv73vv71SQO+/ve+/ve+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgQO+/vSAgICAgICAg77+977+977+9ICAgICDvv73vv73vv71h77+9Uu+/ve+/vTnvv73vv73vv73vv71A77+977+9QO+/ve+/ve+/ve+/ve+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBA77+977+9QO+/vUnvv73vv73vv70gICAgICAg77+977+977+9MO+/ve+/ve+/ve+/vUDvv73vv71A77+9Yu+/ve+/vTzvv700ICAgICDvv73vv73vv70g77+9aD4g77+977+977+977+977+977+977+977+977+9Ou+/ve+/ve+/ve+/vV7vv73vv73vv73vv73vv73vv73vv73vv71e77+977+977+977+9Uu+/ve+/ve+/vV7vv71A77+977+977+977+977+9IO+/ve+/vTvvv70x77+9Le+/ve+/ve+/ve+/ve+/vSDvv70oOyAgICAgIEA5SDRA77+977+977+977+977+977+9Xu+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vV7vv73vv71c77+977+977+977+977+9IDkg77+977+977+977+9XO+/ve+/ve+/ve+/vUPvv73vv73vv71eQO+/ve+/ve+/vVzvv73vv71D77+977+977+9Cipr77+9Q++/vSh5Ku+/ve+/ve+/vV3vv71oNCDvv73vv73vv70g77+9SGlpOO+/vTTvv73vv71c77+977+9Q++/ve+/ve+/vQrvv71D77+9CiAgIO+/ve+/ve+/vSDvv73vv700CiAgICAgICAgIO+/vSh5Ku+/vSnvv73vv73vv70g77+9KDQgIEA577+9NO+/ve+/vVzvv73vv71D77+977+977+9Cu+/vUPvv70r77+977+977+9INWoMgogICAgICAgICDvv70oeSrvv73vv71e77+977+977+9XO+/ve+/vUPvv73vv73vv70KKmvvv71D77+9KHkq77+9yZrvv73vv70gMSAgQDnvv70077+977+9XO+/ve+/vUPvv73vv73vv70K77+9Q++/vcua77+977+9INWILwogICAgICAgIO+/vSh5Ku+/ve+/ve+/vV1x77+9VO+/ve+/vV3vv73vv73vv73vv70q77+977+977+9QO+/ve+/ve+/ve+/ve+/ve+/vV3vv73vv71DX++/vSAgICAga++/vVTvv73vv71e77+977+977+977+977+977+9ICAgICpK77+977+9eWnvv73vv73vv71c77+977+9Q++/ve+/ve+/vQoqa++/vUPvv70oeSrvv73vv73vv73vv73vv73vv71c77+977+9Q++/ve+/ve+/ve+/vSh5Ku+/ve+/ve+/vVzvv70g77+9aCop77+977+977+977+977+977+9QO+/ve+/ve+/ve+/ve+/ve+/vV/vv73vv717S++/ve+/ve+/ve+/vV/vv73vv71D77+977+9e++/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vV/vv73vv71f77+977+977+977+977+977+9X++/ve+/vSjvv71GQO+/ve+/ve+/ve+/vV9A77+977+977+977+977+9CkDvv73vv73vv73vv73vv70p77+9J++/ve+/ve+/ve+/vVEo77+9Su+/ve+/ve+/ve+/ve+/ve+/vUDvv73vv70077+977+9QO+/ve+/ve+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg77+977+977+977+977+9J++/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73vv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBA77+977+977+977+9X0Dvv73vv73vv73vv71fQO+/ve+/ve+/ve+/ve+/ve+/vTUo77+977+977+977+9QO+/ve+/ve+/vV7vv73vv71A77+977+9QO+/ve+/vUDvv73vv73vv73vv73vv70h77+9J++/vT/vv70g77+9Uu+/vXtE77+977+9Q++/ve+/vV/vv73vv71777+977+9MO+/ve+/vUbvv73vv70077+9IO+/vSDvv70g77+9IO+/vTDvv73vv71G77+977+9NO+/vSDvv70w77+977+9Ru+/ve+/vTTvv70g77+9MO+/ve+/vUbvv70177+9IO+/vTDvv73vv71G77+9IjXvv70g77+9MO+/ve+/vUbvv71CNe+/vSDvv70w77+977+9Ru+/vWI177+9IO+/vTDvv73vv71G77+977+9Ne+/vSDvv70w77+977+9Ru+/ve+/vTXvv70g77+9MO+/ve+/vUbvv73vv70177+9IO+/vTDvv73vv71G77+977+9Ne+/vSDvv70w77+977+9Ru+/vTbvv70g77+9MO+/ve+/vUbvv70iNu+/vSDvv70w77+977+9Ru+/vUI277+9IO+/vTDvv73vv71G77+9Yjbvv70g77+9MO+/ve+/vUbvv73vv70277+9IO+/vTDvv73vv71G77+977+9Nu+/vSDvv70w77+977+9Ru+/ve+/vTbvv70g77+9MO+/ve+/vUbvv73vv70277+9IO+/vTDvv73vv71G77+9N++/vSDvv70w77+977+9Ru+/vSI377+9IO+/vTDvv73vv71G77+9Qjfvv70g77+9MO+/ve+/vUbvv71iN++/vSDvv70w77+977+9Ru+/ve+/vTfvv70g77+977+977+977+977+9byAgICDvv73vv73vv71v77+9KF0KCu+/ve+/ve+/vW/vv73vv73vv73vv71v77+977+977+977+9b++/ve+/ve+/ve+/vW/vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv73vv71Ub++/ve+/ve+/vX00ICAgICAg77+9ICAgICA4CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71677+9LGnvv71PTe+/vTdOK0p977+977+977+977+9be+/ve+/vSnvv71Q77+9aO+/ve+/vea6oe+/ve+/ve+/vWw577+977+9Ze+/ve+/ve+/vSp4L++/ve+/vUfguofvv71C77+977+9NXnvv71y77+9IO+/vTnvv73vv73vv70sa++/ve+/ve+/ve+/vT9r77+977+9QnDvv73vv73vv73vv73DqO+/ve+/ve+/vVHvv71F77+9M05r77+9Lu+/ve+/ve+/ve+/ve+/vVJb77+9M0FN77+977+977+977+9YXRe77+977+9X++/ve+/ve+/vU/vv71L77+977+9WjRe77+9aH0077+9Je+/ve+/ve+/ve+/vSZ777+977+977+9b++/ve+/vXBHW11MRu+/vXnvv70ha07vv71/77+977+977+977+9JO+/vVXvv71977+9VO+/ve+/ve+/vXrRhu+/vVfJjizvv73vv70177+9Qe+/ve+/ve+/vTHvv71tVu+/ve+/vSlr77+9fu+/vSXvv73vv73vv70j77+9QO+/vWzvv73vv70rJUDvv71yfO+/ve+/ve+/vXRUIO+/vTRL77+9J++/vTvvv73vv71g77+977+9WyHvv71IeV/vv73vv71VdS3vv706cVvvv71577+9Su+/ve+/ve+/ve+/vXAh77+9alt1LWNm77+92JTvv73vv70vZioj77+936nvv70577+9Le+/vW7vv70q77+977+9WO+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDQne+/vVJgaHDvv73Zke+/ve+/ve+/vWQpeMqsUV/vv73vv71377+9Z0w+Xjh+Ujkhb++/ve+/vTh+XcyRWVpR77+977+9Km/vv73vv73vv73vv73vv71DUu+/ve+/ve+/ve+/vcOzY3ZD77+977+9aO+/ve+/ve+/vdimyaPvv704fO+/vVfvv70877+977+9MGNO77+92pEv77+9Mu+/vVcrWi/vv70j0qNcT19877+9IXFCNnp/77+977+9OmND77+9c++/vScKICAgICAgICAgICAgICAgICAgICAgPVNlbSXvv71A77+977+9KGI2Su+/vXjvv71N77+9WGLvv73vv73vv73rqLxf77+977+9au+/vTfvv705XFl5Jk7vv70/77+9du+/vXQmWO+/vUTvv73vv73vv70/77+9CiAgIO+/ve+/vUUhN++/vUd3x5Yw77+977+9S1Nw77+9eu+/ve+/vWh377+977+977+977+977+9Y++/ve+/ve+/ve+/ve+/vU3vv71jZ++/ve+/ve+/vVXvv71Kxp7Fj2Ut77+977+9P0/vv73vv71WQe+/vV3GhSTvv73Tsu+/vTpI77+9Me+/vWh8ZEHvv71rbu+/vUjvv73vv73ci++/vTLNn++/ve+/vSXvv70n77+9ZzLvv73vv71kTu+/vSHvv73vv73vv70377+9Pe+/vdiW77+9aCrvv71RxYRv77+9NVzvv70kPTY5Xty677+977+9LCsp77+9M++/ve+/vWnvv73vv73vv70gIG4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB4Z0Dvv73vv73Esu+/ve+/vV/Ypk7vv70pe1NyS1Tvv70n77+977+977+9RO+/vT9QOu+/ve+/ve+/vWpVe2tRZ++/vSk377+9LXnvv73vv73vv71x4YCwMe+/vVfvv73vv70uaWfvv73vv71177+977+977+977+9OO+/vU/vv73vv717Ye+/ve+/vci3au+/vTss77+9O1rvv71U77+9aUrvv70g77+977+9b++/vV/vv73vv73vv71i77+977+9K++/vT3vv73vv71pWyrvv71q77+9Cnt177+977+9XXzvv70gICAgICAgICAgICAgICAgICAgICAgICDvv71W77+977+9d++/vWDvv73vv73vv71H77+977+977+977+977+91YLvv70x77+9R++/vXpg77+9YO+/ve+/vQrvv73vv73vv73vv71QJu+/vSHDiF0rY++/ve+/ve+/ve+/ve+/ve+/vTPvv73vv71A77+977+977+9zp11eO+/vcaeSe+/vWLvv71E77+977+977+9Ye+/vWXRtmXvv73vv73vv73vv73vv70877+977+977+977+977+977+9Mj/vv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUCPvv73vv73vv70iP9CF77+9ae+/vX3vv73vv70zNFzvv73vv73vv73dpifvv71TMu+/vXbvv73vv71g77+9MF4nRmY177+9Me+/ve+/ve+/ve+/ve+/vVt677+9RVhHbembn++/vVXvv71yL++/ve+/ve+/ve+/ve+/ve+/ve+/ve+/vUhtY0ciNu+/ve+/ve+/ve+/ve+/vVbvv73vv73vv71LTT1777+9ICAgIO+/ve+/vTrvv73vv71877+9YTpJLe+/vUltUe+/vS94KiAgICAgIGph1Lbvv70x77+977+9Ou+/ve+/vTjvv71w77+977+9IHnvv71777+977+977+9y5bvv71A77+977+977+9YF3vv73vv73Msu+/vVEKPe+/ve+/ve+/vUHvv73vv718Te+/vTDKle+/vd+/77+9KC3vv716RsKq77+977+977+977+9KsuhaXxbV++/vWIt77+9M++/vVogIO+/ve+/vWrvv73vv73vv73vv73vv71X2Krvv73vv711Tinvv70m77+9L++/ve+/ve+/ve+/vSPvv73vv70peu+/vWZg77+977+977+9Kz3vv73hhK1jz6rvv73vv70i77+977+977+9c++/ve+/vSlb77+977+977+92bZGKe+/vUvvv70sRT/vv73vv73vv73vv73vv71q77+977+9Ve+/vVxYJe+/vW7vv73vv71h77+977+977+9fSJiL++/ve+/vWLvv708Ju+/ve+/vX5gPAp277+977+977+977+9eGLvv701Qnl8KT/vv71477+977+977+977+977+9KO+/ve+/ve+/ve+/vU3vv71WYG0z77+977+977+9Te+/vTvvv71877+9Su+/vUPvv71scO+/ve+/vTHvv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcNKi77+977+9Je+/ve+/vduU77+977+977+9QiUx77+9KlTvv71B77+9Mu+/vSs/Zu+/ve+/ve+/ve+/vUtAfu+/ve+/ve+/ve+/ve+/vc2oLi/vv71FPO+/vdWG77+977+9xrzvv71r77+9ZdmtcyXvv73vv73go5Tvv715YTfvv73vv73vv73vv73vv73vv71zY++/vTDvv71l77+9RO+/vWbvv71477+977+9cG90JO+/vSEq77+9V2E7Cu+/ve+/vSEn77+9Vynvv73vv73vv70k4om/azvctu+/vXfvv70iZO+/vXLIl++/ve+/vX0x77+977+9W++/ve+/ve+/ve+/vSBN77+977+977+9O++/ve+/ve+/ve+/vV07SO+/ve+/vUBG77+9Ue+/ve+/vUTvv73vv71Xbe+/ve+/vTHvv73vv71sLu+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg77+9ZCDvv70lae+/vTQu77+9dXXvv73vv71mCiAgICAgICAgICAg77+977+9YgogICAgICAgICAgICAgIO+/vTzvv73vv71Mau+/ve+/ve+/vTBv77+977+9CjDIt++/vT1HbFTvv71477+977+977+9O++/vTpa77+977+977+977+9cO+/vTVr77+9P++/vUjvv71C77+9Pu+/ve+/ve+/vSfMi++/ve+/ve+/vSFy77+977+9ae+/vX0w77+9Y2Vf77+977+9LO+/vT3vv73vv73vv73vv71YUiLvv70mOm/ZkX8gICDvv73vv71v77+977+977+977+977+977+9CjBT77+977+9Nu+/ve+/vTPvv73vv73vv73vv73vv719cXrvv73vv71d77+977+9JArvv73vv70gICAgICAgICAgICAgICAgICAgIO+/ve+/vdq8Su+/ve+/vXZEOiJu77+977+977+977+977+9RnI977+9CiAg1rDvv70g77+977+977+977+9LO+/vU5DQlXvv73vv71ebu+/ve+/ve+/vTMh77+9P++/vTzSve+/vWzvv73vv71BOO+/vXvvv73aku+/ve+/vU/vv73vv73vv73vv71C77+977+977+977+9CiAgICAgICAg77+977+977+977+9SO+/ve+/ve+/ve+/vWRr77+977+9S++/ve+/vWN1KCTvv73vv73vv73vv73vv73vv71s77+977+977+9a0lAVO+/vVDvv708Ou+/ve+/ve+/vSJGCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBLa++/vTV0SSFX77+9L0bvv73vv73vv709PO+/ve+/vUnvv71s77+977+977+977+977+977+9IF1hVtKrdynvv73vv71Z77+9XyzHnEktNu+/vXdgV3Dvv73vv71T77+9XSXvv73vv71PMGLvv73vv73vv73vv73vv71ex4tVWO+/ve+/vXTIs3Xvv73vv73vv73vv70g77+977+9b++/vUvvv70KICB277+9Ye+/ve+/vX9v77+9Mu+/ve+/ve+/vUfvv71b77+977+9RGfvv73vv71/77+977+9bVcK77+9Ie+/vSdu77+977+9Mz851ZPvv71p77+977+977+977+977+977+977+977+9e++/vWnvv73vv73vv71vPE7vv73vv702JFfvv73vv73vv73No++/ve+/ve+/vTM+UU3vv73vv73vv71S77+9Ue+/vWbvv73vv70+77+977+9Ie+/ve+/vdm5PG1K6aCJOu+/vWAq1rLvv70o77+9YO+/ve+/vVQx77+9P++/ve+/vWBx77+9TAogICAgICAgICAgICAgICAg77+9SFAx77+977+9a++/vTrvv71477+9cu+/ve+/ve+/vS9jJ2FVZ8eR77+977+9eu+/vWpARe+/ve+/vX9bbe+/ve+/vV0s77+977+977+977+977+977+9P++/ve+/ve+/vS3vv73vv71N77+977+977+977+9M2M6f++/vTbvv71VYu+/ve+/ve+/vcee77+9e92ERO+/ve+/vSZ6bXNQae+/vUjvv73vv70K77+977+977+977+977+977+9CiAgICAgIO+/ve+/vX/vv70r77+977+9bXBq3Lnvv73vv70K77+977+9yJrvv70077+9U3lIYu+/vTTXry/vv73vv73vv73vv71q77+9Ou+/ve+/vXLYmu+/vVzvv73vv73vv73vv71Z77+977+977+977+9UT7vv73vv71D77+977+9L8e8Lu+/vU9VQu+/ve+/ve+/vWdCVj/vv71/77+977+9CiAgICAgICAgICAg77+977+9NF4oxKfapGExaDnvv71X77+9ZO+/ve+/vVLvv71m77+977+9Iu+/ve+/ve+/vVzvv73vv71sWVPvv73convKt++/ve+/vVLvv71977+9Mu+/vQrvv73vv73vv70gICAgIEE+ey/vv71K77+977+977+9eu+/ve+/vQrvv73bnDbvv73vv73vv73vv70677+9Qe+/vStraU7vv70wMCpse++/vcaCz4hvy5Xvv73vv70re3hD77+9x4bvv73vv73vv71NQ++/vWAqVyvvv71jLe+/vUNz77+977+9OiLvv73vv73vv71K77+977+9fu+/vX5N3oTvv71v77+9XmHvv71377+9XO+/vVrvv73vv71g77+9e++/ve+/ve+/ve+/vUHvv70x1bbvv71MTe+/ve+/ve+/ve+/vUE077+9c8eoYXs9PU7vv73vv73vv71rVz0kfO+/vXbvv73vv70877+9PQrvv73vv73vv73vv717PCk977+9Le+/vUjvv73vv71g77+9cnnvv73vv70077+9N++/ve+/ve+/ve+/vVRBS++/ve+/ve+/vX3vv712Pe+/ve+/vSfvv73vv73vv73vv73vv70377+9Le+/vWTvv70nKu+/vSAgKEbvv73vv71f77+9U2bvv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71R77+977+9Q++/vVhT77+977+9fe+/ve+/vSjvv73vv73vv73vv70mae+/ve+/vWnvv73vv70277+9Tu+/vUTvv73vv71M77+977+9bSnvv73vv71CXu+/vdK577+977+977+977+9N++/vXXvv73vv70wQyzvv70xfO+/ve+/ve+/vcK+77+9QO+/ve+/vSPvv73vv73vv73vv71t77+977+9aGFG77+977+977+977+977+9CiAgICAg77+9eCzvv73vv73vv71U77+977+977+9w5Dvv71LIlTvv73vv71PLDTvv73vv73vv71a77+977+977+977+977+977+977+9QGPvv73vv70oJVQo77+977+9TTzvv73vv71477+977+9LUrvv71U77+9NO+/vTXdnu+/vSHvv70KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv73dv++/vWDvv709RDjvv70k77+9bO+/ve+/vWR3J++/vV3vv71MeO+/vTLvv73vv71QxaNY77+977+9PGwi77+977+9ZO+/vUfvv71CT1fvv73vv73vv73vv70ha1/vv702be+/ve+/vSfvv71aL8emcu+/vXbvv71877+977+9PO+/ve+/vXFFbu+/ve+/vT5OXkp7MCvvv71DXe+/ve+/vWLvv71xSnxF77+977+9czJNQcOE77+977+977+9xrkyOnPvv71CTjYh77+977+977+977+977+977+977+977+977+9Rnnvv73vv73vv73vv73vv73vv70ja0ZT77+92Knvv70/77+9MO+/vTRF77+9LVXvv70m77+9ClPvv71BRjUwb++/ve+/vcak77+977+9Te+/ve+/vTLvv71uOO+/vUrvv73vv71mciTvv73vv73vv71c77+977+977+977+9fkPvv73vv73vv71i77+9VmRESCjHle+/ve+/ve+/ve+/vQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71a77+9Ve+/ve+/ve+/vS0z77+9yYvvv717V++/vX03Sylo77+9NO+/ve+/ve+/vXMj77+977+977+977+977+977+977+9fTFPQiIx77+9CiAgICAgICAgICAgICAgICAgICAgIO+/ve+/vVJP77+9Ve+/ve+/vQrFve+/ve+/vVPvv73vv73vv73vv70w77+9MVVv77+977+977+977+977+977+9N++/vVxJde+/vUnvv73vv71XMu+/ve+/ve+/vTvvv73vv73vv71PRH8977+977+977+9cDjvv73vv71ES++/vWvvv70677+9MzQ577+9enzvv71y77+9MO+/ve+/vWPvv70ySC0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH9V77+977+9TmVq77+977+977+977+9b++/vUfvv71fee+/ve+/ve+/vUdw77+977+9eu+/vS3vv73vv71K77+9OSlPUT4377+977+9Su+/vSor77+9LO+/vXQ5W++/vUnvv70677+977+977+977+977+977+977+977+977+9IO+/vcml77+9Zu+/ve+/vU3vv71677+977+977+9x6bvv73vv70yfMeoCiAgICAgICAgW++/vWLvv73vv73vv70p77+9ICAgICAgICBFeVvvv73vv73vv73vv71t77+93pbLj2jvv71A77+9f++/vUDvv73vv701Me+/ve+/ve+/ve+/vUjvv73vv73vv73vv71D77+9V++/ve+/vVMo77+977+9K++/vXTvv71b77+977+9IydD77+9Y2om77+9OO+/ve+/vXrvv71/WtG4X++/ve+/vXot77+977+977+9XO+/vdaEZe+/vSYi77+977+9be+/ve+/ve+/vWEi77+9PdC377+977+977+977+9Vu+/vSnvv73vv73vv70mOmlX77+977+9OGfvv73vv73vv73vv73vv719XkdO77+9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI2VU77+977+977+977+977+9fe+/ve+/vWRJN++/vWE977+9Nu+/ve+/vX7vv71A77+9XDDvv71n77+977+977+977+977+9xpxI77+977+977+977+9CtW577+977+9MjRYRu+/ve+/vSt4L++/ve+/ve+/ve+/vWZmee+/ve+/vUjvv71A77+977+9Oe+/vXsv77+9VO+/vVXvv73vv71n77+977+9eO+/vU3vv71HN864a++/ve+/ve+/vWTvv73vv70k77+9J++/vWNS77+9NWrvv73vv73Us1g977+977+9Ke+/ve+/vWFo373vv71+NlDvv71l77+977+9Lu+/vcK9O++/vT5gI++/ve+/ve+/vX9x77+977+977+9I++/vVlhIi1U77+9cS9Q77+977+9Oe+/vWjvv71E77+9Ze+/vUPvv73vv71eUO+/vWdz77+977+977+977+977+9fUfvv71/Z++/vU/vv703Yu+/ve+/vSM/77+9I2AueyYKYFPvv73vv73vv73vv73vv70477+977+977+9XFrvv70xbu+/vXY9Iu+/vUbvv71i77+9c++/vd2C77+977+9TFzvh4Hvv73vv73Vvu+/vV/vv73vv73vv73vv71JZO+/vT7vv70qZyAgICAgICAgdNiK77+9KFQ377+9TO+/vUHvv71277+9Ke+/ve+/vX99O3tC77+9Qe+/ve+/ve+/vV7vv73vv73vv73vv73vv70p77+977+9djhbaGokJu+/ve+/ve+/vUEKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICDvv71U77+9Me+/vS1q77+977+9Inrvv73ZnCAgICDvv70+77+9WTI/RO+/vXLvv70g77+9Nk3vv73vv708JDAt77+9XHNn77+977+9Nu+/ve+/ve+/vWV277+977+977+977+9
+
+# ===== CẤU HÌNH BAN ĐẦU =====
+CHECK_INTERVAL=20
+PLACE_ID="2753915549"
+VIP_LINK="0"
+TARGET_FPS="20"
+selected_clients=()
+client_places=()
+client_vips=()
+
+# ===== BẢNG MÀU SÁNG & RÕ NÉT =====
+RED="\e[1;31m"; GREEN="\e[1;32m"; YELLOW="\e[1;33m"
+CYAN="\e[1;36m"; MAGENTA="\e[1;35m"; BOLD="\e[1m"; RESET="\e[0m"
+
+# ===== GIAO DIỆN CHÍNH =====
+draw_menu() {
+clear
+printf "${GREEN} _____  _   _  ___  _   _  _   _ ${RESET}\n"
+printf "${GREEN}|_   || | | || || \ | || | | |${RESET}\n"
+printf "${GREEN}  | |  | || | | | |  \| || || |${RESET}\n"
+printf "${GREEN}  | |  |  _  | | | | |\  ||  _  |${RESET}\n"
+printf "${GREEN}  ||  || |||||| \||| |_|${RESET}\n"
+printf "       ${BOLD}Đ Ứ C  T H Ị N H  R E J O I N${RESET}\n"
+echo -e "${CYAN}+------------------------------------------------------+${RESET}"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "1. Bắt đầu Farm" "2. Chọn App / Nick"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "3. Cài Map & SVV" "4. Thiết lập số FPS khóa"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "5. Siêu Fix Lag + Lock FPS" "6. Bơm Script Cày Thuê Gui"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "0. Thoát (Exit)" ""
+echo -e "${CYAN}+------------------------------------------------------+${RESET}"
+}
+
+# ===== [OPTION 5] BƠM SCRIPT LUA CAN THIỆP THẲNG VÀO ENGINE ROBLOX =====
+super_fix_lag() {
+clear
+echo -e "${BOLD}${YELLOW}--- [5] TỰ ĐỘNG BƠM SCRIPT SIÊU FIX LAG & LOCK FPS NỘI BỘ ---${RESET}"
+
+if [ ${#selected_clients[@]} -eq 0 ]; then
+    echo -e "${RED}Lỗi: Bạn chưa chọn Nick ở Option 2!${RESET}"
+    sleep 2; return
+fi
+
+local LUA_FILE="/sdcard/Termux_SuperFixLag.lua"
+
+cat << 'EOL' > "$LUA_FILE"
+repeat wait() until game:IsLoaded()
+
+pcall(function()
+if setfpscap then
+setfpscap($TARGET_FPS)
+print("Đã khóa FPS thành công ở mức: " .. tostring($TARGET_FPS))
+end
+end)
+
+local workspace = game:GetService("Workspace")
+local lighting = game:GetService("Lighting")
+lighting.GlobalShadows = false
+
+for _, obj in pairs(workspace:GetDescendants()) do
+if obj:IsA("BasePart") then
+obj.Material = Enum.Material.SmoothPlastic
+obj.Reflectance = 0
+end
+if obj:IsA("Decal") or obj:IsA("Texture") or obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
+obj:Destroy()
+end
+local name = obj.Name:lower()
+if name:match("tree") or name:match("leaf") or name:match("grass") or name:match("house") or name:match("building") then
+pcall(function() obj:Destroy() end)
+end
+end
+EOL
+
+echo -e "${CYAN}Đang quét tìm toàn bộ folder Autoexecute của các Executor phổ biến...${RESET}"
+local success_count=0
+
+local paths=(
+"/sdcard/Delta/Autoexecute"
+"/sdcard/Fluxus/Autoexecute"
+"/sdcard/VegaX/Autoexecute"
+"/sdcard/ArceusX/Autoexecute"
+"/sdcard/Codex/Autoexecute"
+"/sdcard/Cryptic/Autoexecute"
+"/sdcard/com.roblox.client/files/autoexec"
+)
+
+local -a target_folders=()
+for p in "${paths[@]}"; do [ -d "$p" ] && target_folders+=("$p"); done
+
+while IFS= read -r found; do
+    [ -n "$found" ] && target_folders+=("$found")
+done < <(
+    find /sdcard \
+        \( -iname "Autoexecute" -o -iname "autoexec" \) \
+        -type d 2>/dev/null
+)
+
+local -a unique_folders=()
+while IFS= read -r line; do
+    [ -n "$line" ] && unique_folders+=("$line")
+done < <(printf "%s\n" "${target_folders[@]}" | sort -u)
+
+for folder in "${unique_folders[@]}"; do
+if [ -d "$folder" ]; then
+    cp "$LUA_FILE" "$folder/Termux_SuperFixLag.lua" 2>/dev/null
+
+    if [ -f "$folder/Termux_SuperFixLag.lua" ]; then  
+        echo -e "${GREEN} -> [OK] Đã nạp thành công vào: $folder${RESET}"  
+        success_count=$((success_count + 1))  
+    else  
+        echo -e "${RED} -> [LỖI] Không thể ghi file vào: $folder (Ghi thất bại)${RESET}"  
+    fi  
+fi
+done
+
+if [ $success_count -gt 0 ]; then
+    echo -e "\n${BOLD}${GREEN}THÀNH CÔNG! Đã phủ rộng và xác thực an toàn file Lua.${RESET}"
+else
+    echo -e "\n${RED}[CẢNH BÁO] Không phát hiện folder tự động chạy nào. Đang tạo folder mặc định...${RESET}"
+    mkdir -p /sdcard/Delta/Autoexecute 2>/dev/null
+    cp "$LUA_FILE" /sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua 2>/dev/null
+    if [ -f "/sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua" ]; then
+        echo -e "${GREEN}-> Đã cố định tại /sdcard/Delta/Autoexecute thành công!${RESET}"
+    else
+        echo -e "${RED}-> Thất bại nghiêm trọng: Vui lòng cấp quyền bộ nhớ cho Termux!${RESET}"
+    fi
+fi
+sleep 3
+}
+
+# ===== [OPTION 6] BƠM SCRIPT CÀY THUÊ GUI NỘI BỘ =====
+menu_cay_thue_script() {
+clear
+echo -e "${BOLD}${YELLOW}--- [6] TỰ ĐỘNG BƠM SCRIPT CÀY THUÊ HÌNH ẢNH (V2) ---${RESET}"
+
+if [ ${#selected_clients[@]} -eq 0 ]; then
+    echo -e "${RED}Lỗi: Bạn chưa chọn Nick ở Option 2!${RESET}"
+    sleep 2; return
+fi
+
+local LUA_FILE_CAY="/sdcard/Termux_CayThueV2.lua"
+
+cat << 'EOL' > "$LUA_FILE_CAY"
+--[[
+    SCRIPT CÀY THUÊ CHO ĐIỆN THOẠI (BẢN V2 - CÓ HIỂN THỊ TÊN ẨN DẤU SAO)
+    Chạy bằng Tool/Executor trên điện thoại.
+--]]
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+-- Hàm ẩn 4 ký tự cuối của tên người chơi
+local function cheTen(username)
+	local doDai = string.len(username)
+	if doDai <= 4 then
+		return "***"
+	else
+		local phanDau = string.sub(username, 1, doDai - 4)
+		return phanDau .. "****"
+	end
+end
+
+local tenDaChe = cheTen(player.Name)
+
+-- 1. Xóa UI cũ nếu đã tồn tại
+if PlayerGui:FindFirstChild("MobileTracker") then
+	PlayerGui.MobileTracker:Destroy()
+end
+
+-- 2. Khởi tạo Giao diện
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MobileTracker"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = PlayerGui
+
+-- Nút "Menu Cày" ở góc trên bên trái
+local BtnToggle = Instance.new("TextButton")
+BtnToggle.Name = "BtnToggle"
+BtnToggle.Size = UDim2.new(0, 130, 0, 45)
+BtnToggle.Position = UDim2.new(0, 15, 0, 15)
+BtnToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+BtnToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+BtnToggle.TextSize = 16
+BtnToggle.Font = Enum.Font.SourceSansBold
+BtnToggle.Text = "Menu Cày"
+BtnToggle.Parent = ScreenGui
+
+-- Bảng Menu nhập liệu
+local Menu = Instance.new("Frame")
+Menu.Name = "Menu"
+Menu.Size = UDim2.new(0, 260, 0, 190)
+Menu.Position = UDim2.new(0, 15, 0, 70)
+Menu.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Menu.BorderSizePixel = 2
+Menu.Visible = false
+Menu.Parent = ScreenGui
+
+-- Ô gõ chữ
+local Input = Instance.new("TextBox")
+Input.Name = "Input"
+Input.Size = UDim2.new(0, 240, 0, 40)
+Input.Position = UDim2.new(0, 10, 0, 15)
+Input.PlaceholderText = "Nhập mục tiêu (vd: 1b Beli)..."
+Input.Text = ""
+Input.TextSize = 14
+Input.Parent = Menu
+
+-- Nút Lưu lại
+local BtnSave = Instance.new("TextButton")
+BtnSave.Name = "BtnSave"
+BtnSave.Size = UDim2.new(0, 240, 0, 40)
+BtnSave.Position = UDim2.new(0, 10, 0, 65)
+BtnSave.BackgroundColor3 = Color3.fromRGB(0, 140, 0)
+BtnSave.TextColor3 = Color3.fromRGB(255, 255, 255)
+BtnSave.TextSize = 16
+BtnSave.Font = Enum.Font.SourceSansBold
+BtnSave.Text = "Lưu mục tiêu"
+BtnSave.Parent = Menu
+
+-- Dòng hiển thị chữ (Có chứa tên người chơi)
+local HienThi = Instance.new("TextLabel")
+HienThi.Name = "HienThi"
+HienThi.Size = UDim2.new(0, 240, 0, 50)
+HienThi.Position = UDim2.new(0, 10, 0, 120)
+HienThi.BackgroundTransparency = 1
+HienThi.TextColor3 = Color3.fromRGB(255, 255, 0)
+HienThi.TextSize = 16
+HienThi.TextWrapped = true
+
+-- Đọc dữ liệu cũ từ bộ nhớ máy
+local SavedText = listfiles and pcall(function() return readfile("caythue_data.txt") end) and readfile("caythue_data.txt") or "Chưa nhập gì"
+HienThi.Text = "[" .. tenDaChe .. "]: " .. SavedText
+HienThi.Parent = Menu
+
+-- 3. Logic xử lý tương tác
+BtnToggle.MouseButton1Click:Connect(function()
+	Menu.Visible = not Menu.Visible
+end)
+
+BtnSave.MouseButton1Click:Connect(function()
+	local text = Input.Text
+	if text ~= "" then
+		-- Hiển thị cấu trúc dạng [Tên***]: Nội dung cày
+		HienThi.Text = "[" .. tenDaChe .. "]: " .. text
+		Input.Text = ""
+		
+		-- Ghi đè vào bộ nhớ máy để mang sang server khác
+		if writefile then
+			pcall(function()
+				writefile("caythue_data.txt", text)
+			end)
+		end
+	end
+end)
+EOL
+
+echo -e "${CYAN}Đang tiến hành tìm kiếm và dán Script Cày Thuê Gui vào Autoexecute...${RESET}"
+local success_count=0
+
+local paths=(
+"/sdcard/Delta/Autoexecute"
+"/sdcard/Fluxus/Autoexecute"
+"/sdcard/VegaX/Autoexecute"
+"/sdcard/ArceusX/Autoexecute"
+"/sdcard/Codex/Autoexecute"
+"/sdcard/Cryptic/Autoexecute"
+"/sdcard/com.roblox.client/files/autoexec"
+)
+
+local -a target_folders=()
+for p in "${paths[@]}"; do [ -d "$p" ] && target_folders+=("$p"); done
+
+while IFS= read -r found; do
+    [ -n "$found" ] && target_folders+=("$found")
+done < <(
+    find /sdcard \
+        \( -iname "Autoexecute" -o -iname "autoexec" \) \
+        -type d 2>/dev/null
+)
+
+local -a unique_folders=()
+while IFS= read -r line; do
+    [ -n "$line" ] && unique_folders+=("$line")
+done < <(printf "%s\n" "${target_folders[@]}" | sort -u)
+
+for folder in "${unique_folders[@]}"; do
+if [ -d "$folder" ]; then
+    cp "$LUA_FILE_CAY" "$folder/Termux_CayThueV2.lua" 2>/dev/null
+
+    if [ -f "$folder/Termux_CayThueV2.lua" ]; then  
+        echo -e "${GREEN} -> [OK] Đã dán thành công vào: $folder${RESET}"  
+        success_count=$((success_count + 1))  
+    fi  
+fi
+done
+
+if [ $success_count -gt 0 ]; then
+    echo -e "\n${BOLD}${GREEN}HOÀN THÀNH! Bản script Cày Thuê đã nạp sẵn sàng vào Executor!${RESET}"
+else
+    echo -e "\n${RED}[CẢNH BÁO] Không tìm thấy thư mục chạy tự động. Thử cố định mặc định...${RESET}"
+    mkdir -p /sdcard/Delta/Autoexecute 2>/dev/null
+    cp "$LUA_FILE_CAY" /sdcard/Delta/Autoexecute/Termux_CayThueV2.lua 2>/dev/null
+    if [ -f "/sdcard/Delta/Autoexecute/Termux_CayThueV2.lua" ]; then
+        echo -e "${GREEN}-> Đã tạo tại /sdcard/Delta/Autoexecute thành công!${RESET}"
+    fi
+fi
+sleep 3
+}
+
+# ===== CÁC HÀM CHỌN NICK & CÀI ĐẶT MAP =====
+menu_choose_client() {
+clear
+echo -e "${BOLD}${YELLOW}--- [2] CHỌN APP / NICK ---${RESET}"
+local lines=$(pm list packages 2>/dev/null | grep -vE "com.android|com.google|android.ext|com.qualcomm|com.miui|com.termux" | tr -d '\r')
+local -a pkgs=()
+while IFS= read -r l; do pkg=$(echo "$l" | awk -F':' '{print $2}' | tr -d '[:space:]'); [ -n "$pkg" ] && pkgs+=("$pkg"); done <<< "$lines"
+
+for (( i=0; i<${#pkgs[@]}; i++ )); do echo -e "  $((i+1))) ${pkgs[$i]}"; done
+echo -e "  0) Treo TẤT CẢ"
+
+read -r -p "Chọn số (Cách nhau bằng dấu cách): " choices
+if [ -z "$choices" ]; then return; fi
+
+selected_clients=()
+if [ "$choices" == "0" ]; then selected_clients=("${pkgs[@]}");
+else
+    for num in $choices; do
+        if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#pkgs[@]}" ]; then
+            selected_clients+=("${pkgs[$((num-1))]}")
+        fi
+    done
+fi
+for i in "${!selected_clients[@]}"; do client_places[$i]="$PLACE_ID"; client_vips[$i]="$VIP_LINK"; done
+echo "Đã lưu ${#selected_clients[@]} nick thành công!"; sleep 1
+}
+
+menu_setup_game() {
+clear; echo -e "${BOLD}${YELLOW}--- [3] CÀI MAP & VIP ---${RESET}"
+read -r -p "Nhập Place ID (Mặc định Blox Fruits): " p_id
+[ -z "$p_id" ] && p_id="2753915549"
+PLACE_ID=$(echo "$p_id" | tr -d '[:space:]\r')
+
+read -r -p "Nhập/Dán Link VIP (Hoặc nhập 0 nếu dùng SV Thường): " v_link
+[ -z "$v_link" ] && v_link="0"
+VIP_LINK=$(echo "$v_link" | tr -d '[:space:]\r')
+
+for i in "${!selected_clients[@]}"; do
+    client_places[$i]=$PLACE_ID
+    client_vips[$i]=$VIP_LINK
+done
+echo -e "${GREEN}Đã cấu hình dữ liệu Map & VIP thành công!${RESET}"
+sleep 1
+}
+
+menu_lock_fps() {
+clear
+echo -e "${BOLD}${YELLOW}--- [4] THIẾT LẬP MỨC FPS CẦN KHÓA ---${RESET}"
+read -r -p "Nhập mức FPS mong muốn (Khuyên dùng từ 15 đến 25): " fps_val
+if [[ "$fps_val" =~ ^[0-9]+$ ]] && [ "$fps_val" -gt 0 ]; then
+    TARGET_FPS="$fps_val"
+    echo -e "${GREEN}-> Đã ghi nhận mức khóa: $TARGET_FPS FPS! Hãy chạy Option 5 để nạp code.${RESET}"
+fi
+sleep 2
+}
+
+# ===== XỬ LÝ RAM CẤP ĐỘ HỆ THỐNG =====
+get_sys_ram() {
+local mems=($(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} /MemFree/ {f=$2} /^Cached/ {c=$2} END {if(a=="") a=f+c; print int((t-a)/1024)"#"int(t/1024)}' /proc/meminfo 2>/dev/null | tr '#' ' '))
+echo "${mems[0]}MB / ${mems[1]}MB"
+}
+
+get_app_ram() {
+    local pkg="$1"
+    local raw_mem=$(/system/bin/dumpsys meminfo 2>/dev/null | grep -m 1 "$pkg (pid" | awk '{print $1}' | tr -d 'K:,')
+    
+    if [[ "$raw_mem" =~ ^[0-9]+$ ]] && [ "$raw_mem" -gt 0 ]; then
+        echo $((raw_mem / 1024))
+    else
+        echo "0"
+    fi
+}
+
+# ===== CHECK DISCONNECT SIÊU CHUẨN =====
+check_running() {
+    local pkg="$1"
+    local mem=$(get_app_ram "$pkg")
+
+    # Đã giữ nguyên mốc chặn 750MB chuẩn để né kẹt sảnh chờ 682MB
+    if [ "$mem" -gt 750 ]; then
+        if logcat -d -t 50 2>/dev/null | grep "$pkg" | grep -q -iE "disconnected|kick|connection lost|error code|connection timed out"; then
+            am force-stop "$pkg" >/dev/null 2>&1
+            logcat -c 2>/dev/null
+            return 1
+        fi
+        return 0
+    fi
+    return 1
+}
+
+# ===== HÀM MỞ NICK SẠCH SẼ =====
+launch_client() {
+local pkg="$1"; local place_id="$2"; local vip_link="$3"
+am force-stop "$pkg" >/dev/null 2>&1
+sleep 1
+
+local clean_code=""
+if [ -n "$vip_link" ] && [ "$vip_link" != "0" ]; then
+    if echo "$vip_link" | grep -q "privateServerLinkCode="; then
+        clean_code=$(echo "$vip_link" | grep -o 'privateServerLinkCode=[^&]*' | cut -d'=' -f2)
+    elif echo "$vip_link" | grep -q "code="; then
+        clean_code=$(echo "$vip_link" | grep -o 'code=[^&]*' | cut -d'=' -f2)
+    else 
+        clean_code="$vip_link" 
+    fi
+fi
+
+local uri="roblox://placeId=${place_id}"
+[ -n "$clean_code" ] && uri="${uri}&linkCode=${clean_code}"
+
+monkey -p "$pkg" -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1
+sleep 15
+
+am start -p "$pkg" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
+am start -n "$pkg/com.roblox.client.ActivitySplash" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
+}
+
+# ===== LUỒNG CHẠY CHÍNH VỚI DASHBOARD TĨNH =====
+start_farm() {
+if [ ${#selected_clients[@]} -eq 0 ]; then return; fi
+clear
+
+echo -e "${YELLOW}=== ĐANG KHỞI CHẠY TUẦN TỰ DANH SÁCH CLIENT ===${RESET}"
+for i in "${!selected_clients[@]}"; do
+local pkg="${selected_clients[$i]}"
+echo -e "Kích hoạt luồng game thứ $((i+1)): ${CYAN}$pkg${RESET}..."
+launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"
+echo -e "${YELLOW}>> Đang chờ thêm 30 giây để game load ổn định...${RESET}"
+sleep 30
+done
+
+clear
+logcat -c 2>/dev/null
+
+while true; do
+printf "\e[H"
+local sys_ram=$(get_sys_ram)
+
+echo -e "${CYAN}==================================================================${RESET}"  
+echo -e "                 LIVE DASHBOARD TĨNH - ĐỨC THỊNH ULTRA REJOIN     ${RESET}"  
+echo -e "${CYAN}==================================================================${RESET}"  
+echo -e "${YELLOW}>> Máy ảo: ${BOLD}${CYAN}${sys_ram}${RESET} | Đang cày: ${GREEN}${#selected_clients[@]} Nick${RESET} | FPS cấu hình: ${YELLOW}$TARGET_FPS${RESET}"  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+echo -e "${BOLD}TÊN FILE APP              | TRẠNG THÁI     | RAM ALLOCATED        ${RESET}"  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+  
+for i in "${!selected_clients[@]}"; do  
+  local pkg="${selected_clients[$i]}"  
+  local short_pkg="${pkg:0:23}"  
+    
+  if check_running "$pkg"; then  
+    local app_ram=$(get_app_ram "$pkg")  
+    printf "%-25s | ${GREEN}Đang hoạt động${RESET} | ${YELLOW}%-4s MB${RESET}\n" "$short_pkg" "$app_ram"  
+  else  
+    printf "%-25s | ${RED}Đang Rejoin...${RESET} | %-7s\n" "$short_pkg" "0 MB"  
+    launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"  
+    sleep 30  
+  fi  
+done  
+  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+echo -e "Giữ nút Ctrl + C để dừng Tool."  
+sleep $CHECK_INTERVAL
+done
+}
+
+# ===== KHỞI CHẠY VÒNG LẶP MENU =====
+while true; do
+    draw_menu
+    read -r -p ">> Nhập lệnh: " m
+    case $m in
+        1) start_farm ;;
+        2) menu_choose_client ;;
+        3) menu_setup_game ;;
+        4) menu_lock_fps ;;
+        5) super_fix_lag ;;
+        6) menu_cay_thue_script ;;
+        0) clear; exit 0 ;;
+    esac
+done
