@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/env bash
+
+echo "=== HỆ THỐNG XÁC THỰC KEY ==="
+printf ">> Nhập mã Key: "
+read -r user_key
+
+if curl -s "https://raw.githubusercontent.com/trandurhrie-boop/Ducthinh/main/key.txt" | grep -qxFF "$user_key"; then
+    echo "Key chính xác! Đang mở menu..."
+    sleep 1
+    echo "=== MENU ĐỨC THỊNH REJOIN ==="
+    echo "1. Bắt đầu Farm"
+    echo "2. Chọn App / Nick"
+    echo "0. Thoát"
+else
+    echo "Key sai!"
+    exit 1
+fi
+  
