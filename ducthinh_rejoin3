@@ -1,0 +1,310 @@
+#!/data/data/com.termux/files/usr/bin/env bash
+
+===== CẤU HÌNH BAN ĐẦU =====
+
+CHECK_INTERVAL=20
+PLACE_ID="2753915549"
+VIP_LINK="0"
+TARGET_FPS="20"
+selected_clients=()
+client_places=()
+client_vips=()
+
+===== BẢNG MÀU SÁNG & RÕ NÉT =====
+
+RED="\e[1;31m"; GREEN="\e[1;32m"; YELLOW="\e[1;33m"
+CYAN="\e[1;36m"; MAGENTA="\e[1;35m"; BOLD="\e[1m"; RESET="\e[0m"
+
+===== GIAO DIỆN CHÍNH =====
+
+draw_menu() {
+clear
+printf "${GREEN} _____  _   _  ___  _   _  _   _ ${RESET}\n"
+printf "${GREEN}|_   || | | || || \ | || | | |${RESET}\n"
+printf "${GREEN}  | |  | || | | | |  \| || || |${RESET}\n"
+printf "${GREEN}  | |  |  _  | | | | |\  ||  _  |${RESET}\n"
+printf "${GREEN}  ||  || |||||| \||| |_|${RESET}\n"
+printf "       ${BOLD}Đ Ứ C  T H Ị N H  R E J O I N${RESET}\n"
+echo -e "${CYAN}+------------------------------------------------------+${RESET}"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "1. Bắt đầu Farm" "2. Chọn App / Nick"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "3. Cài Map & SVV" "4. Thiết lập số FPS khóa"
+printf "| ${BOLD}%-26s${RESET} | ${BOLD}%-23s${RESET} |\n" "5. Siêu Fix Lag + Lock FPS" "0. Thoát (Exit)"
+echo -e "${CYAN}+------------------------------------------------------+${RESET}"
+}
+
+===== [OPTION 5] BƠM SCRIPT LUA CAN THIỆP THẲNG VÀO ENGINE ROBLOX =====
+
+super_fix_lag() {
+clear
+echo -e "${BOLD}${YELLOW}--- [5] TỰ ĐỘNG BƠM SCRIPT SIÊU FIX LAG & LOCK FPS NỘI BỘ ---${RESET}"
+
+if [ ${#selected_clients[@]} -eq 0 ]; then
+echo -e "${RED}Lỗi: Bạn chưa chọn Nick ở Option 2!${RESET}"
+sleep 2; return
+fi
+
+local LUA_FILE="/sdcard/Termux_SuperFixLag.lua"
+
+cat << EOF > "$LUA_FILE"
+repeat wait() until game:IsLoaded()
+
+pcall(function()
+if setfpscap then
+setfpscap($TARGET_FPS)
+print("Đã khóa FPS thành công ở mức: " .. tostring($TARGET_FPS))
+end
+end)
+
+local workspace = game:GetService("Workspace")
+local lighting = game:GetService("Lighting")
+lighting.GlobalShadows = false
+
+for _, obj in pairs(workspace:GetDescendants()) do
+if obj:IsA("BasePart") then
+obj.Material = Enum.Material.SmoothPlastic
+obj.Reflectance = 0
+end
+if obj:IsA("Decal") or obj:IsA("Texture") or obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
+obj:Destroy()
+end
+local name = obj.Name:lower()
+if name:match("tree") or name:match("leaf") or name:match("grass") or name:match("house") or name:match("building") then
+pcall(function() obj:Destroy() end)
+end
+end
+EOF
+
+echo -e "${CYAN}Đang quét tìm toàn bộ folder Autoexecute của các Executor phổ biến...${RESET}"
+local success_count=0
+
+local paths=(
+"/sdcard/Delta/Autoexecute"
+"/sdcard/Fluxus/Autoexecute"
+"/sdcard/VegaX/Autoexecute"
+"/sdcard/ArceusX/Autoexecute"
+"/sdcard/Codex/Autoexecute"
+"/sdcard/Cryptic/Autoexecute"
+"/sdcard/com.roblox.client/files/autoexec"
+)
+
+local -a target_folders=()
+for p in "${paths[@]}"; do [ -d "$p" ] && target_folders+=("$p"); done
+while read -r found; do [ -n "$found" ] && target_folders+=("$found"); done <<< "$(find /sdcard -type d  2>/dev/null)"
+
+local -a unique_folders=($(echo "${target_folders[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+
+for folder in "${unique_folders[@]}"; do
+if [ -d "$folder" ]; then
+cp "$LUA_FILE" "$folder/Termux_SuperFixLag.lua" 2>/dev/null
+
+  if [ -f "$folder/Termux_SuperFixLag.lua" ]; then  
+    echo -e "${GREEN} -> [OK] Đã nạp thành công vào: $folder${RESET}"  
+    success_count=$((success_count + 1))  
+  else  
+    echo -e "${RED} -> [LỖI] Không thể ghi file vào: $folder (Ghi thất bại)${RESET}"  
+  fi  
+fi
+done
+
+if [ $success_count -gt 0 ]; then
+echo -e "\n${BOLD}${GREEN}THÀNH CÔNG! Đã phủ rộng và xác thực an toàn file Lua.${RESET}"
+else
+echo -e "\n${RED}[CẢNH BÁO] Không phát hiện folder tự động chạy nào. Đang tạo folder mặc định...${RESET}"
+mkdir -p /sdcard/Delta/Autoexecute 2>/dev/null
+cp "$LUA_FILE" /sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua 2>/dev/null
+if [ -f "/sdcard/Delta/Autoexecute/Termux_SuperFixLag.lua" ]; then
+echo -e "${GREEN}-> Đã cố định tại /sdcard/Delta/Autoexecute thành công!${RESET}"
+else
+echo -e "${RED}-> Thất bại nghiêm trọng: Vui lòng cấp quyền bộ nhớ cho Termux!${RESET}"
+fi
+fi
+sleep 3
+}
+
+===== CÁC HÀM CHỌN NICK & CÀI ĐẶT MAP =====
+
+menu_choose_client() {
+clear
+echo -e "${BOLD}${YELLOW}--- [2] CHỌN APP / NICK ---${RESET}"
+local lines=$(pm list packages 2>/dev/null | grep -vE "com.android|com.google|android.ext|com.qualcomm|com.miui|com.termux" | tr -d '\r')
+local -a pkgs=()
+while IFS= read -r l; do pkg=$(echo "$l" | awk -F':' '{print $2}' | tr -d '[:space:]'); [ -n "$pkg" ] && pkgs+=("$pkg"); done <<< "$lines"
+
+for (( i=0; i<${#pkgs[@]}; i++ )); do echo -e "  $((i+1))) ${pkgs[$i]}"; done
+echo -e "  0) Treo TẤT CẢ"
+
+read -r -p "Chọn số (Cách nhau bằng dấu cách): " choices
+if [ -z "$choices" ]; then return; fi
+
+selected_clients=()
+if [ "$choices" == "0" ]; then selected_clients=("${pkgs[@]}");
+else
+for num in $choices; do
+if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#pkgs[@]}" ]; then
+selected_clients+=("${pkgs[$((num-1))]}")
+fi
+done
+fi
+for i in "${!selected_clients[@]}"; do client_places[$i]="$PLACE_ID"; client_vips[$i]="$VIP_LINK"; done
+echo "Đã lưu ${#selected_clients[@]} nick thành công!"; sleep 1
+}
+
+menu_setup_game() {
+clear; echo -e "${BOLD}${YELLOW}--- [3] CÀI MAP & VIP ---${RESET}"
+read -r -p "Nhập Place ID (Mặc định Blox Fruits): " p_id
+[ -z "$p_id" ] && p_id="2753915549"
+PLACE_ID=$(echo "$p_id" | tr -d '[:space:]\r')
+
+read -r -p "Nhập/Dán Link VIP (Hoặc nhập 0 nếu dùng SV Thường): " v_link
+[ -z "$v_link" ] && v_link="0"
+VIP_LINK=$(echo "$v_link" | tr -d '[:space:]\r')
+
+for i in "${!selected_clients[@]}"; do
+client_places[$i]=$PLACE_ID
+client_vips[$i]=$VIP_LINK
+done
+echo -e "${GREEN}Đã cấu hình dữ liệu Map & VIP thành công!${RESET}"
+sleep 1
+}
+
+menu_lock_fps() {
+clear
+echo -e "${BOLD}${YELLOW}--- [4] THIẾT LẬP MỨC FPS CẦN KHÓA ---${RESET}"
+read -r -p "Nhập mức FPS mong muốn (Khuyên dùng từ 15 đến 25): " fps_val
+if [[ "$fps_val" =~ ^[0-9]+$ ]] && [ "$fps_val" -gt 0 ]; then
+TARGET_FPS="$fps_val"
+echo -e "${GREEN}-> Đã ghi nhận mức khóa: $TARGET_FPS FPS! Hãy chạy Option 5 để nạp code.${RESET}"
+fi
+sleep 2
+}
+
+===== XỬ LÝ RAM CẤP ĐỘ HỆ THỐNG =====
+
+get_sys_ram() {
+local mems=($(awk '/MemTotal/ {t=$2} /MemAvailable/ {a=$2} /MemFree/ {f=$2} /^Cached/ {c=$2} END {if(a=="") a=f+c; print int((t-a)/1024)"#"int(t/1024)}' /proc/meminfo 2>/dev/null | tr '#' ' '))
+echo "${mems[0]}MB / ${mems[1]}MB"
+}
+
+get_app_ram() {
+    local pkg="$1"
+    
+    local raw_mem=$(/system/bin/dumpsys meminfo 2>/dev/null | grep -m 1 "$pkg (pid" | awk '{print $1}' | tr -d 'K:,')
+    
+    if [[ "$raw_mem" =~ ^[0-9]+$ ]] && [ "$raw_mem" -gt 0 ]; then
+        echo $((raw_mem / 1024))
+    else
+        echo "0"
+    fi
+}
+
+===== CHECK DISCONNECT SIÊU CHUẨN =====
+
+check_running() {
+    local pkg="$1"
+    local mem=$(get_app_ram "$pkg")
+
+    if [ "$mem" -gt 250 ]; then
+        if logcat -d -t 50 2>/dev/null | grep "$pkg" | grep -q -iE "disconnected|kick|connection lost|error code|connection timed out"; then
+            am force-stop "$pkg" >/dev/null 2>&1
+            logcat -c 2>/dev/null
+            return 1
+        fi
+        return 0
+    fi
+    return 1
+}
+
+===== HÀM MỞ NICK SẠCH SẼ =====
+
+launch_client() {
+local pkg="$1"; local place_id="$2"; local vip_link="$3"
+am force-stop "$pkg" >/dev/null 2>&1
+sleep 1
+
+local clean_code=""
+if [ -n "$vip_link" ] && [ "$vip_link" != "0" ]; then
+    if echo "$vip_link" | grep -q "privateServerLinkCode="; then
+        clean_code=$(echo "$vip_link" | grep -o 'privateServerLinkCode=[^&]*' | cut -d'=' -f2)
+    elif echo "$vip_link" | grep -q "code="; then
+        clean_code=$(echo "$vip_link" | grep -o 'code=[^&]*' | cut -d'=' -f2)
+    else 
+        clean_code="$vip_link" 
+    fi
+fi
+
+local uri="roblox://placeId=${place_id}"
+[ -n "$clean_code" ] && uri="${uri}&linkCode=${clean_code}"
+
+monkey -p "$pkg" -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1
+
+sleep 15
+
+# FIX LỖI HIỆN BẢNG CHỌN APP: Ép hệ thống bắn link VIP vào ĐÚNG cái nick đang xử lý
+am start -p "$pkg" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
+am start -n "$pkg/com.roblox.client.ActivitySplash" -a android.intent.action.VIEW -d "$uri" >/dev/null 2>&1
+}
+
+===== LUỒNG CHẠY CHÍNH VỚI DASHBOARD TĨNH =====
+
+start_farm() {
+if [ ${#selected_clients[@]} -eq 0 ]; then return; fi
+clear
+
+echo -e "${YELLOW}=== ĐANG KHỞI CHẠY TUẦN TỰ DANH SÁCH CLIENT ===${RESET}"
+for i in "${!selected_clients[@]}"; do
+local pkg="${selected_clients[$i]}"
+echo -e "Kích hoạt luồng game thứ $((i+1)): ${CYAN}$pkg${RESET}..."
+launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"
+echo -e "${YELLOW}>> Đang chờ thêm 30 giây để game load ổn định...${RESET}"
+sleep 30
+done
+
+clear
+logcat -c 2>/dev/null
+
+while true; do
+printf "\e[H"
+local sys_ram=$(get_sys_ram)
+
+echo -e "${CYAN}==================================================================${RESET}"  
+echo -e "                 LIVE DASHBOARD TĨNH - ĐỨC THỊNH ULTRA REJOIN     ${RESET}"  
+echo -e "${CYAN}==================================================================${RESET}"  
+echo -e "${YELLOW}>> Máy ảo: ${BOLD}${CYAN}${sys_ram}${RESET} | Đang cày: ${GREEN}${#selected_clients[@]} Nick${RESET} | FPS cấu hình: ${YELLOW}$TARGET_FPS${RESET}"  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+echo -e "${BOLD}TÊN FILE APP              | TRẠNG THÁI     | RAM ALLOCATED        ${RESET}"  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+  
+for i in "${!selected_clients[@]}"; do  
+  local pkg="${selected_clients[$i]}"  
+  local short_pkg="${pkg:0:23}"  
+    
+  if check_running "$pkg"; then  
+    local app_ram=$(get_app_ram "$pkg")  
+    printf "%-25s | ${GREEN}Đang hoạt động${RESET} | ${YELLOW}%-4s MB${RESET}\n" "$short_pkg" "$app_ram"  
+  else  
+    printf "%-25s | ${RED}Đang Rejoin...${RESET} | %-7s\n" "$short_pkg" "0 MB"  
+    launch_client "$pkg" "${client_places[$i]}" "${client_vips[$i]}"  
+    sleep 30  
+  fi  
+done  
+  
+echo -e "${CYAN}------------------------------------------------------------------${RESET}"  
+echo -e "Giữ nút Ctrl + C để dừng Tool."  
+sleep $CHECK_INTERVAL
+
+done
+}
+
+while true; do
+draw_menu
+read -r -p ">> Nhập lệnh: " m
+case $m in
+1) start_farm ;;
+2) menu_choose_client ;;
+3) menu_setup_game ;;
+4) menu_lock_fps ;;
+5) super_fix_lag ;;
+0) clear; exit 0 ;;
+esac
+done
+  
